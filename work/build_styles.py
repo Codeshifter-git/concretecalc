@@ -118,6 +118,24 @@ text = text.replace(
 # The hero comment still says "green" in one place; fix wording.
 text = text.replace("/* same accent, lighter — for text on dark green (passes contrast) */", "")
 
+# Centered hero (2026-11-20): the base hero was a two-column grid with
+# asymmetric padding (12.2% right, 14% left), which left the H1 7px
+# off-center at 1280px. Single column, symmetric padding, centered text.
+text = text.replace(
+  ".hero { position: relative; min-height: 480px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 48px 12.2% 60px 14%; overflow: hidden; }",
+  ".hero { position: relative; min-height: 480px; display: grid; grid-template-columns: 1fr; align-items: center; padding: 48px 13% 60px; overflow: hidden; text-align: center; }",
+)
+text = text.replace(
+  ".hero-description { max-width: 430px; margin: 22px 0 28px;",
+  ".hero-description { max-width: 430px; margin: 22px auto 28px;",
+)
+text = text.replace(
+  ".tool-page .hero-description { margin: 14px 0 0; }",
+  ".tool-page .hero-description { margin: 14px auto 0; }",
+)
+assert "grid-template-columns: 1fr 1fr; align-items: center; padding: 48px 12.2% 60px 14%" not in text, "hero centering replace did not apply"
+assert "margin: 22px auto 28px" in text and "margin: 14px auto 0" in text, "hero description centering did not apply"
+
 # --- append concrete-specific components ---
 text += """
 /* ============ concretecalc. additions ============ */
@@ -203,6 +221,19 @@ text += """
 @media (max-width: 680px) {
   .pour-row { grid-template-columns: 1fr auto; }
   .pour-row .pour-vol { grid-column: 1; }
+}
+/* Hero actions — "How it works" secondary button beside the calculator link (2026-11-20). */
+.hero-actions { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.hero-btn { min-height: 44px; display: inline-flex; align-items: center; padding: 10px 18px; border: 1.5px solid var(--slate); border-radius: 6px; background: transparent; color: var(--slate); font-size: 14px; font-weight: 700; }
+.hero-btn:hover { background: #33414b12; }
+.hero-btn:active { transform: scale(.97); }
+/* Restored QA fixes (2026-11-20, v1 QA): the "$ / yd³" unit labels must not
+   wrap, and the tool-page intro must stay visible on phones — it is the
+   direct answer (GEO), and hiding it would cost the page its answer on the
+   device most people use. These live here now so regeneration cannot drop them. */
+.input-with-unit span { white-space: nowrap; padding-right: 12px; color: #4a545a; font: 13px var(--mono); }
+@media (max-width: 680px) {
+  .tool-page .hero-description { display: block; font-size: 15px; line-height: 1.65; }
 }
 @media print {
   .shape-tabs, .pour-list, .pour-add, .calc-options, .cost-grid { display: none !important; }

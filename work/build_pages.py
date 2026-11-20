@@ -810,6 +810,7 @@ def render_html(p):
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f3f1ea">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f0a500'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' text-anchor='middle' fill='%23232e36'%3Ecc%3C/text%3E%3C/svg%3E">
     <meta name="description" content="{html.escape(p['desc'], quote=True)}">
     <title>{html.escape(p['title'])}</title>
     <meta property="og:type" content="website">
@@ -867,7 +868,10 @@ def render_html(p):
           <p class="eyebrow"><span class="eyebrow-dot"></span> {p['eyebrow']}</p>
           <h1>{p['h1_main']}<br><span>{p['h1_sub']}</span></h1>
           <p class="hero-description">{p['geo']}</p>
-          <a class="text-link" href="#calculator">Open the calculator <span aria-hidden="true">↓</span></a>
+          <div class="hero-actions">
+            <a class="text-link" href="#calculator">Open the calculator <span aria-hidden="true">↓</span></a>
+            <a class="hero-btn" href="#guide">How it works</a>
+          </div>
         </div>
       </section>
 
