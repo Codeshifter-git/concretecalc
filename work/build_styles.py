@@ -136,6 +136,15 @@ text = text.replace(
 assert "grid-template-columns: 1fr 1fr; align-items: center; padding: 48px 12.2% 60px 14%" not in text, "hero centering replace did not apply"
 assert "margin: 22px auto 28px" in text and "margin: 14px auto 0" in text, "hero description centering did not apply"
 
+# "How it works" is now a text hyperlink, not a button (2026-11-20): hide
+# only the "Open the calculator" link in tool-page heroes, not every
+# text link. The calculator link gets a calc-link class in the templates.
+text = text.replace(
+  ".tool-page .hero .text-link { display: none; }",
+  ".tool-page .hero .calc-link { display: none; }",
+)
+assert ".tool-page .hero .calc-link { display: none; }" in text, "calc-link hide replace did not apply"
+
 # --- append concrete-specific components ---
 text += """
 /* ============ concretecalc. additions ============ */
@@ -222,11 +231,17 @@ text += """
   .pour-row { grid-template-columns: 1fr auto; }
   .pour-row .pour-vol { grid-column: 1; }
 }
-/* Hero actions — "How it works" secondary button beside the calculator link (2026-11-20). */
+/* Hero actions — row holding the hero links, centered (2026-11-20). */
 .hero-actions { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
-.hero-btn { min-height: 44px; display: inline-flex; align-items: center; padding: 10px 18px; border: 1.5px solid var(--slate); border-radius: 6px; background: transparent; color: var(--slate); font-size: 14px; font-weight: 700; }
-.hero-btn:hover { background: #33414b12; }
-.hero-btn:active { transform: scale(.97); }
+/* Titles centered site-wide (2026-11-20) — section headings follow the
+   centered hero H1. The section-heading row becomes a centered stack so
+   its paragraph sits under the title instead of beside it. */
+.section-heading, .quick-title, .guide-intro, .faq-heading { text-align: center; }
+.section-heading { flex-direction: column; align-items: center; gap: 8px; }
+.section-heading > p { margin: 0 auto; }
+.guide-intro > p:not(.eyebrow) { margin-left: auto; margin-right: auto; }
+.table-intro { text-align: center; }
+.guide-article h1, .guide-article h2 { text-align: center; }
 /* Restored QA fixes (2026-11-20, v1 QA): the "$ / yd³" unit labels must not
    wrap, and the tool-page intro must stay visible on phones — it is the
    direct answer (GEO), and hiding it would cost the page its answer on the

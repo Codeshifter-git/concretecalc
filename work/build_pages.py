@@ -869,8 +869,8 @@ def render_html(p):
           <h1>{p['h1_main']}<br><span>{p['h1_sub']}</span></h1>
           <p class="hero-description">{p['geo']}</p>
           <div class="hero-actions">
-            <a class="text-link" href="#calculator">Open the calculator <span aria-hidden="true">↓</span></a>
-            <a class="hero-btn" href="#guide">How it works</a>
+            <a class="text-link calc-link" href="#calculator">Open the calculator <span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#guide">How it works <span aria-hidden="true">↓</span></a>
           </div>
         </div>
       </section>

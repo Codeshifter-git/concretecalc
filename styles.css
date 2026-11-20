@@ -325,6 +325,12 @@ a.tool-card:active { transform: scale(.98); }
 .more-tools-link { max-width: 1050px; margin: 22px auto 0; }
 .more-tools-link a { color: var(--slate); font-size: 14px; font-weight: 700; }
 .input-grid--two { grid-template-columns: 1fr 1fr; }
+/* Altersrechner: the two date labels wrap to different heights
+   ("Stichtag (meistens heute)" runs to two lines), which pushed the
+   Stichtag box a line below the Geburtsdatum box. Flex column + auto
+   top margin keeps both labels top-aligned and both boxes bottom-aligned. */
+.input-grid--two .field { display: flex; flex-direction: column; }
+.input-grid--two .field .input-with-unit { margin-top: auto; }
 .input-with-unit input[type="date"] { font-family: var(--sans); font-size: 15px; font-weight: 500; }
 .result-value--age { font-size: 26px; line-height: 1.3; }
 
@@ -357,7 +363,7 @@ a.tool-card:active { transform: scale(.98); }
 .tool-page .hero-visual { display: none; }
 .tool-page .hero h1 { font-size: clamp(34px, 4vw, 46px); }
 .tool-page .hero-description { margin: 14px auto 0; }
-.tool-page .hero .text-link { display: none; }
+.tool-page .hero .calc-link { display: none; }
 .tool-page .hero-copy { padding-bottom: 0; }
 .tool-page .calculator-section { padding-top: 16px; }
 .tool-page .section-heading { margin-bottom: 15px; }
@@ -496,11 +502,17 @@ a.tool-card:active { transform: scale(.98); }
   .pour-row { grid-template-columns: 1fr auto; }
   .pour-row .pour-vol { grid-column: 1; }
 }
-/* Hero actions — "How it works" secondary button beside the calculator link (2026-11-20). */
+/* Hero actions — row holding the hero links, centered (2026-11-20). */
 .hero-actions { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
-.hero-btn { min-height: 44px; display: inline-flex; align-items: center; padding: 10px 18px; border: 1.5px solid var(--slate); border-radius: 6px; background: transparent; color: var(--slate); font-size: 14px; font-weight: 700; }
-.hero-btn:hover { background: #33414b12; }
-.hero-btn:active { transform: scale(.97); }
+/* Titles centered site-wide (2026-11-20) — section headings follow the
+   centered hero H1. The section-heading row becomes a centered stack so
+   its paragraph sits under the title instead of beside it. */
+.section-heading, .quick-title, .guide-intro, .faq-heading { text-align: center; }
+.section-heading { flex-direction: column; align-items: center; gap: 8px; }
+.section-heading > p { margin: 0 auto; }
+.guide-intro > p:not(.eyebrow) { margin-left: auto; margin-right: auto; }
+.table-intro { text-align: center; }
+.guide-article h1, .guide-article h2 { text-align: center; }
 /* Restored QA fixes (2026-11-20, v1 QA): the "$ / yd³" unit labels must not
    wrap, and the tool-page intro must stay visible on phones — it is the
    direct answer (GEO), and hiding it would cost the page its answer on the
