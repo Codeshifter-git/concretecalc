@@ -570,3 +570,18 @@ a.tool-card:active { transform: scale(.98); }
   .clusters-section { padding: 48px 5%; }
   .cluster-grid { grid-template-columns: 1fr; }
 }
+/* Tips div (homepage, 2026-11-20): six verified tips in a 3-column grid,
+   same card language as the clusters. */
+.tips-section { padding: 56px 11.2% 64px; background: var(--paper); scroll-margin-top: 70px; }
+.tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1050px; margin: 24px auto 0; }
+.tip-card { padding: 22px 24px; border-radius: 8px; background: var(--white); box-shadow: 0 4px 16px #2b333812; text-align: center; }
+.tip-num { display: block; margin-bottom: 8px; color: var(--amber-dark); font: 700 13px var(--sans); letter-spacing: 1.5px; }
+.tip-card h3 { margin: 0 0 6px; font: 600 17px/1.35 var(--display); letter-spacing: -.2px; }
+.tip-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+@media (max-width: 900px) {
+  .tips-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 680px) {
+  .tips-section { padding: 48px 5%; }
+  .tips-grid { grid-template-columns: 1fr; }
+}
