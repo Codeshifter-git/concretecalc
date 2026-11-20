@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f1ea">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f0a500'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' text-anchor='middle' fill='%23232e36'%3Ecc%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Curb and gutter calculator: run length, curb size, and gutter width to cubic yards, bags, and cost.">
+    <title>Concrete Curb Calculator | concretecalc.</title>
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <link rel="canonical" href="https://codeshifter-git.github.io/concretecalc/curb/">
+    <meta property="og:title" content="Concrete Curb Calculator | concretecalc.">
+    <meta property="og:description" content="Curb and gutter calculator: run length, curb size, and gutter width to cubic yards, bags, and cost.">
+<script>
+      /* Loading skeleton: this timer lives in <head> (before any stylesheet) so a slow connection can't delay it. */
+      (function () {
+        var root = document.documentElement;
+        var done = false;
+        setTimeout(function () { if (!done && document.readyState !== "complete") root.classList.add("is-loading"); }, 400);
+        function hide() {
+          if (done) return;
+          done = true;
+          root.classList.remove("is-loading");
+          setTimeout(function () { root.classList.add("is-ready"); }, 400);
+        }
+        window.addEventListener("load", hide);
+        setTimeout(hide, 2500);
+      })();
+    </script>
+    <link rel="preload" href="../fonts/bitter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+      /* Loading skeleton — inline so it paints before the stylesheet arrives. */
+      .page-skeleton { position: fixed; inset: 0; z-index: 60; background: #f3f1ea; opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s; }
+      html.is-loading .page-skeleton { opacity: 1; visibility: visible; transition: opacity .15s ease; }
+      html.is-ready .page-skeleton { display: none; }
+      .sk-inner { max-width: 1050px; margin: 0 auto; padding: 26px 7% 0; }
+      .sk-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 52px; }
+      .sk-mark { width: 30px; height: 30px; border-radius: 9px 9px 9px 3px; background: #f0a500; color: #232e36; display: grid; place-items: center; font: 600 12px monospace; }
+      .sk-bar { position: relative; height: 16px; max-width: 520px; margin: 0 0 14px; border-radius: 4px; background: #e6e4d8; overflow: hidden; }
+      .sk-bar--title { height: 34px; max-width: 420px; }
+      .sk-bar--short { max-width: 300px; }
+      .sk-bar::after, .sk-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, #fffdf8 50%, transparent); transform: translateX(-100%); animation: sk-shimmer 1.4s infinite; }
+      .sk-card { position: relative; height: 220px; margin-top: 34px; border-radius: 10px; background: #e6e4d8; overflow: hidden; }
+      @keyframes sk-shimmer { to { transform: translateX(100%); } }
+      @media (prefers-reduced-motion: reduce) { .sk-bar::after, .sk-card::after { animation: none; } }
+    </style>
+    <link rel="stylesheet" href="../styles.css?v=1">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Concrete Curb Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "en",
+  "description": "Curb and gutter calculator: run length, curb size, and gutter width to cubic yards, bags, and cost."
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is curb and gutter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is the concrete edge along a street. The curb is the upright edge that keeps cars off the sidewalk, and the gutter is the flat strip beside it that carries rain water to the drain. They are usually poured together as one piece."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What size is a standard curb and gutter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sizes vary by city — each city sets its own standard in its street rules, so there is no single standard size. A 6 by 6 inch curb with an 18-inch gutter at 6 inches thick is a common size, and it is the default on this page. Check your city rules before you order."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many bags of concrete do I need for curb and gutter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Divide the ordered cubic feet by the yield of one bag. An 80-lb bag fills 0.60 cubic feet. 100 feet of curb and gutter at the default sizes is 100 cubic feet before waste, which is 167 bags of 80-lb mix. The calculator shows all four bag sizes, with waste included."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this curb calculator free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It is free, with no sign-up. Use it as often as you like, on a phone or a computer."
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://codeshifter-git.github.io/concretecalc/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Concrete Curb Calculator",
+      "item": "https://codeshifter-git.github.io/concretecalc/curb/"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Concrete Curb Calculator",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Work out the curb cross-section",
+      "text": "The curb is the upright box. Width times height, in feet. A 6 by 6 inch curb is 0.5 by 0.5 feet. 0.5 ft × 0.5 ft = 0.25 sq ft"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Work out the gutter cross-section",
+      "text": "The gutter is the flat strip next to the curb. Width times thickness, in feet. An 18-inch gutter at 6 inches thick is 1.5 by 0.5 feet. 1.5 ft × 0.5 ft = 0.75 sq ft"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add the two areas",
+      "text": "Add the curb area and the gutter area to get the full cross-section. 0.25 sq ft + 0.75 sq ft = 1.00 sq ft"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Multiply by the run length",
+      "text": "Cross-section times length gives cubic feet. This is the net volume, before waste. 1.00 sq ft × 100 ft = 100 ft³"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Divide by 27, then add waste",
+      "text": "One cubic yard holds 27 cubic feet. Divide, then add 10% waste for spills and uneven forms. 100 ft³ ÷ 27 = 3.70 yd³ · × 1.10 = 4.07 yd³"
+    }
+  ]
+}
+    </script>
+    <script src="app.js" defer></script>
+  </head>
+  <body class="tool-page">
+    <div class="page-skeleton" id="page-skeleton" aria-hidden="true">
+      <div class="sk-inner">
+        <div class="sk-brand"><span class="sk-mark">cc</span></div>
+        <div class="sk-bar sk-bar--title"></div>
+        <div class="sk-bar sk-bar--title sk-bar--short"></div>
+        <div class="sk-bar"></div>
+        <div class="sk-bar sk-bar--short"></div>
+        <div class="sk-card"></div>
+      </div>
+    </div>
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="concretecalc. home">
+        <span class="brand-mark" aria-hidden="true">cc</span>
+        <span>concretecalc<span class="brand-period">.</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="../">All calculators</a>
+        <a href="../slab/">Slab</a>
+        <a href="../cubic-yard/">Cubic yard</a>
+        <a href="../guides/">Guides</a>
+      </nav>
+      <a class="header-cta" href="#calculator">Calculate now <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> The concrete curb calculator</p>
+          <h1>Concrete Curb Calculator.<br><span>Curb and gutter, by the foot.</span></h1>
+          <p class="hero-description">100 feet of curb and gutter — a 6 by 6 inch curb with an 18-inch gutter, 6 inches thick — needs 3.70 cubic yards of concrete. That is 100 cubic feet.</p>
+          <a class="text-link" href="#calculator">Open the calculator <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section class="calculator-section" id="calculator">
+        <div class="calculator">
+          <div class="calc-main">
+            <div class="calc-toolbar">
+              <span class="live-indicator"><span></span> Ready — type a number</span>
+              <button class="reset-button" type="button" id="reset-button">Reset <span aria-hidden="true">↺</span></button>
+            </div>
+            <form id="curb-form" novalidate>
+              <div class="input-grid">
+<div class="field" id="length-field">
+                  <label for="length">Run length</label>
+                  <div class="input-with-unit">
+                    <input id="length" name="length" type="number" min="0" step="any" value="100" inputmode="decimal">
+                    <select id="length-unit" name="lengthUnit" aria-label="Unit for run length">
+                      <option value="ft" selected>ft</option><option value="in">in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="curbWidth-field">
+                  <label for="curbWidth">Curb width</label>
+                  <div class="input-with-unit">
+                    <input id="curbWidth" name="curbWidth" type="number" min="0" step="any" value="6" inputmode="decimal">
+                    <select id="curbWidth-unit" name="curbWidthUnit" aria-label="Unit for curb width">
+                      <option value="ft">ft</option><option value="in" selected>in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="curbHeight-field">
+                  <label for="curbHeight">Curb height</label>
+                  <div class="input-with-unit">
+                    <input id="curbHeight" name="curbHeight" type="number" min="0" step="any" value="6" inputmode="decimal">
+                    <select id="curbHeight-unit" name="curbHeightUnit" aria-label="Unit for curb height">
+                      <option value="ft">ft</option><option value="in" selected>in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="gutterWidth-field">
+                  <label for="gutterWidth">Gutter width</label>
+                  <div class="input-with-unit">
+                    <input id="gutterWidth" name="gutterWidth" type="number" min="0" step="any" value="18" inputmode="decimal">
+                    <select id="gutterWidth-unit" name="gutterWidthUnit" aria-label="Unit for gutter width">
+                      <option value="ft">ft</option><option value="in" selected>in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="gutterThickness-field">
+                  <label for="gutterThickness">Gutter thickness</label>
+                  <div class="input-with-unit">
+                    <input id="gutterThickness" name="gutterThickness" type="number" min="0" step="any" value="6" inputmode="decimal">
+                    <select id="gutterThickness-unit" name="gutterThicknessUnit" aria-label="Unit for gutter thickness">
+                      <option value="ft">ft</option><option value="in" selected>in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="calc-options">
+                <div class="field">
+                  <label for="waste-slider">Waste allowance</label>
+                  <div class="waste-row">
+                    <input type="range" id="waste-slider" min="0" max="15" step="1" value="10">
+                    <span class="waste-value" id="waste-value">10%</span>
+                  </div>
+                  <small class="field-hint">5–10% for a clean job, 10–15% for rough ground.</small>
+                </div>
+                <div class="field">
+                  <label id="density-label">Concrete density</label>
+                  <div class="density-segmented" role="group" aria-labelledby="density-label" id="density-segmented">
+                    <button type="button" data-density="150" aria-pressed="true">Standard · 150 lb/ft³</button>
+                    <button type="button" data-density="156" aria-pressed="false">Reinforced · 156 lb/ft³</button>
+                    <button type="button" data-density="110" aria-pressed="false">Lightweight · 110 lb/ft³</button>
+                  </div>
+                  <small class="field-hint">Density sets the weight. Standard concrete is 150 lb per cubic foot.</small>
+                </div>
+              </div>
+              <div class="cost-grid">
+                <div class="field">
+                  <label for="price-yard">Price per cubic yard (optional)</label>
+                  <div class="input-with-unit">
+                    <input id="price-yard" name="priceYard" type="number" min="0" step="any" placeholder="e.g. 150" inputmode="decimal">
+                    <span aria-hidden="true">$ / yd³</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="price-bag">Price per bag (optional)</label>
+                  <div class="input-with-unit">
+                    <input id="price-bag" name="priceBag" type="number" min="0" step="any" placeholder="e.g. 6" inputmode="decimal">
+                    <span aria-hidden="true">$ / bag</span>
+                  </div>
+                </div>
+              </div>
+              <p class="form-error" id="form-error" role="alert" hidden></p>
+              <button class="calculate-button" type="submit">Calculate <span aria-hidden="true">↗</span></button>
+              <p class="live-hint">No need to press the button: the answer updates as you type.</p>
+            </form>
+
+            <div class="result-panel" id="result-panel" aria-live="polite" aria-atomic="true">
+              <div class="result-topline"><span>YOUR RESULT</span><span class="result-check" aria-hidden="true">✓</span></div>
+              <div class="result-value" id="result-value">—</div>
+              <p class="result-context" id="result-context"></p>
+              <p class="result-also" id="result-also"></p>
+              <div class="result-rows" id="result-rows"></div>
+              <div class="result-meta"><span id="result-formula"></span><div class="result-actions"><button type="button" id="copy-button">Copy result <span aria-hidden="true">⧉</span></button></div></div>
+              <div class="preset-chips" role="group" aria-label="Common sizes">
+                <span class="preset-label">Common sizes:</span>
+                <button type="button" class="preset-chip" data-length="100" data-lengthUnit="ft" data-curbWidth="6" data-curbWidthUnit="in" data-curbHeight="6" data-curbHeightUnit="in" data-gutterWidth="18" data-gutterWidthUnit="in" data-gutterThickness="6" data-gutterThicknessUnit="in">Street run 100 ft · 6×6 curb · 18 in gutter</button><button type="button" class="preset-chip" data-length="50" data-lengthUnit="ft" data-curbWidth="6" data-curbWidthUnit="in" data-curbHeight="6" data-curbHeightUnit="in" data-gutterWidth="18" data-gutterWidthUnit="in" data-gutterThickness="6" data-gutterThicknessUnit="in">Short run 50 ft · same sizes</button><button type="button" class="preset-chip" data-length="200" data-lengthUnit="ft" data-curbWidth="6" data-curbWidthUnit="in" data-curbHeight="8" data-curbHeightUnit="in" data-gutterWidth="24" data-gutterWidthUnit="in" data-gutterThickness="6" data-gutterThicknessUnit="in">Long run 200 ft · 6×8 curb · 24 in gutter</button>
+              </div>
+            </div>
+            <noscript><p class="form-error">This page needs JavaScript to calculate. 100 feet of curb and gutter — a 6 by 6 inch curb with an 18-inch gutter, 6 inches thick — needs 3.70 cubic yards of concrete. That is 100 cubic feet.</p></noscript>
+          </div>
+          <aside class="calc-aside">
+            <span class="aside-number">GOOD TO KNOW</span>
+            <p class="aside-title">Two shapes, one pour.</p>
+            <p>A curb and gutter pour is two boxes side by side: the upright curb and the flat gutter. Work out each cross-section, add them, and multiply by the run length.</p>
+            <a href="#guide">How it works <span aria-hidden="true">→</span></a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="quick-examples" id="examples">
+        <div class="quick-title"><span class="eyebrow">Common sizes</span><h2>Three sizes to try.</h2></div>
+        <p class="examples-hint">Tap one — the calculator fills itself in.</p>
+        <div class="example-strip">
+          <button type="button" class="example-card" data-length="100" data-lengthUnit="ft" data-curbWidth="6" data-curbWidthUnit="in" data-curbHeight="6" data-curbHeightUnit="in" data-gutterWidth="18" data-gutterWidthUnit="in" data-gutterThickness="6" data-gutterThicknessUnit="in"><span class="example-symbol">▦</span><span class="example-text"><span class="example-title">Street run</span><span class="example-sub">100 ft · 6×6 curb · 18 in gutter — 3.70 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button><button type="button" class="example-card" data-length="50" data-lengthUnit="ft" data-curbWidth="6" data-curbWidthUnit="in" data-curbHeight="6" data-curbHeightUnit="in" data-gutterWidth="18" data-gutterWidthUnit="in" data-gutterThickness="6" data-gutterThicknessUnit="in"><span class="example-symbol">⌂</span><span class="example-text"><span class="example-title">Short run</span><span class="example-sub">50 ft · same sizes — 1.85 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button><button type="button" class="example-card" data-length="200" data-lengthUnit="ft" data-curbWidth="6" data-curbWidthUnit="in" data-curbHeight="8" data-curbHeightUnit="in" data-gutterWidth="24" data-gutterWidthUnit="in" data-gutterThickness="6" data-gutterThicknessUnit="in"><span class="example-symbol">▤</span><span class="example-text"><span class="example-title">Long run, wide gutter</span><span class="example-sub">200 ft · 6×8 curb · 24 in gutter — 9.88 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button>
+        </div>
+      </section>
+
+      <section class="table-section" id="table">
+        <div class="quick-title"><span class="eyebrow">Reference table</span><h2>Curb and gutter volume per 100 ft</h2></div>
+        <p class="table-intro">Concrete in 100 feet of curb and gutter for common size pairs. The curb is width × height, the gutter is width × thickness.</p>
+        <div class="table-wrap">
+          <table class="scale-table">
+            <thead><tr><th scope="col">Curb × gutter</th><th scope="col">Cubic feet per 100 ft</th><th scope="col">Cubic yards per 100 ft</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">6×6 in curb · 12×6 in gutter</th><td>75.00 ft³</td><td>2.78 yd³</td></tr>
+              <tr><th scope="row">6×6 in curb · 18×6 in gutter</th><td>100.00 ft³</td><td>3.70 yd³</td></tr>
+              <tr><th scope="row">6×6 in curb · 24×6 in gutter</th><td>125.00 ft³</td><td>4.63 yd³</td></tr>
+              <tr><th scope="row">6×8 in curb · 18×6 in gutter</th><td>108.33 ft³</td><td>4.01 yd³</td></tr>
+              <tr><th scope="row">8×8 in curb · 24×6 in gutter</th><td>144.44 ft³</td><td>5.35 yd³</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="guide-section" id="guide">
+        <div class="guide-intro">
+          <p class="eyebrow">How it works</p>
+          <h2>How the concrete curb calculator works.</h2>
+          <p>A curb and gutter pour is two boxes side by side. Work out each cross-section, add them, and multiply by the run.</p>
+          <div class="formula-card"><span>The formulas you need</span><strong>Curb area = curb width × curb height</strong><strong>Gutter area = gutter width × gutter thickness</strong><strong>Volume = length × (curb area + gutter area)</strong><small>All sizes are turned into feet first. One cubic yard = 27 cubic feet = 0.765 cubic meters.</small></div>
+        </div>
+        <div class="guide-steps">
+          <article class="guide-step"><span class="step-number">01</span><div><h3>Work out the curb cross-section</h3><p>The curb is the upright box. Width times height, in feet. A 6 by 6 inch curb is 0.5 by 0.5 feet.</p><span class="step-equation">0.5 ft × 0.5 ft = 0.25 sq ft</span></div></article><article class="guide-step"><span class="step-number">02</span><div><h3>Work out the gutter cross-section</h3><p>The gutter is the flat strip next to the curb. Width times thickness, in feet. An 18-inch gutter at 6 inches thick is 1.5 by 0.5 feet.</p><span class="step-equation">1.5 ft × 0.5 ft = 0.75 sq ft</span></div></article><article class="guide-step"><span class="step-number">03</span><div><h3>Add the two areas</h3><p>Add the curb area and the gutter area to get the full cross-section.</p><span class="step-equation">0.25 sq ft + 0.75 sq ft = 1.00 sq ft</span></div></article><article class="guide-step"><span class="step-number">04</span><div><h3>Multiply by the run length</h3><p>Cross-section times length gives cubic feet. This is the net volume, before waste.</p><span class="step-equation">1.00 sq ft × 100 ft = 100 ft³</span></div></article><article class="guide-step"><span class="step-number">05</span><div><h3>Divide by 27, then add waste</h3><p>One cubic yard holds 27 cubic feet. Divide, then add 10% waste for spills and uneven forms.</p><span class="step-equation">100 ft³ ÷ 27 = 3.70 yd³ · × 1.10 = 4.07 yd³</span></div></article>
+        </div>
+      </section>
+
+      <section class="practice-section" id="practice">
+        <div class="quick-title"><span class="eyebrow">Try it yourself</span><h2>Two tasks to try.</h2></div>
+        <p class="table-intro">Tap a task to see the worked solution.</p>
+        <div class="faq-list">
+          <details><summary>Task 1: 80 ft of curb and gutter at the standard sizes. How many cubic yards? <span aria-hidden="true">+</span></summary><p>Work out the cubic yards for 80 feet of curb and gutter with a 6 by 6 inch curb and an 18-inch gutter at 6 inches thick, before waste.</p><p><strong>Solution:</strong> Cross-section is 0.25 + 0.75 = 1.00 square foot. 1.00 × 80 = 80 cubic feet. 80 ÷ 27 = 2.96 cubic yards.</p></details><details><summary>Task 2: 150 ft of curb and gutter, 6×6 in curb, 12 in gutter at 6 in thick. How many cubic yards? <span aria-hidden="true">+</span></summary><p>Work out the cubic yards for 150 feet of curb and gutter with a 6 by 6 inch curb and a 12-inch gutter at 6 inches thick, before waste.</p><p><strong>Solution:</strong> Curb is 0.25 square feet and the gutter is 1.0 × 0.5 = 0.50 square feet, so the cross-section is 0.75 square feet. 0.75 × 150 = 112.50 cubic feet. 112.50 ÷ 27 = 4.17 cubic yards.</p></details>
+        </div>
+      </section>
+
+      <section class="faq-section">
+        <div class="faq-heading"><p class="eyebrow">Still wondering?</p><h2>Questions people ask.</h2></div>
+        <div class="faq-list">
+          <details><summary>What is curb and gutter? <span aria-hidden="true">+</span></summary><p>It is the concrete edge along a street. The curb is the upright edge that keeps cars off the sidewalk, and the gutter is the flat strip beside it that carries rain water to the drain. They are usually poured together as one piece.</p></details><details><summary>What size is a standard curb and gutter? <span aria-hidden="true">+</span></summary><p>Sizes vary by city — each city sets its own standard in its street rules, so there is no single standard size. A 6 by 6 inch curb with an 18-inch gutter at 6 inches thick is a common size, and it is the default on this page. Check your city rules before you order.</p></details><details><summary>How many bags of concrete do I need for curb and gutter? <span aria-hidden="true">+</span></summary><p>Divide the ordered cubic feet by the yield of one bag. An 80-lb bag fills 0.60 cubic feet. 100 feet of curb and gutter at the default sizes is 100 cubic feet before waste, which is 167 bags of 80-lb mix. The calculator shows all four bag sizes, with waste included.</p></details><details><summary>Is this curb calculator free? <span aria-hidden="true">+</span></summary><p>Yes. It is free, with no sign-up. Use it as often as you like, on a phone or a computer.</p></details>
+        </div>
+      </section>
+
+      <section class="more-tools">
+        <div class="quick-title"><span class="eyebrow">More calculators</span><h2>More concrete calculators.</h2></div>
+        <p class="more-tools-link"><a href="../">All concrete calculators <span aria-hidden="true">→</span></a></p>
+        <p class="more-tools-link"><a href="../slab/">Concrete Slab Calculator</a> · <a href="../footing/">Concrete Footing Calculator</a> · <a href="../sonotube/">Concrete Calculator For Sonotube</a></p>
+        <p class="more-tools-link"><a href="../guides/">Concrete guides <span aria-hidden="true">→</span></a></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="../"><span class="brand-mark" aria-hidden="true">cc</span><span>concretecalc<span class="brand-period">.</span></span></a>
+      <p>Concrete calculators — simple, fast, and free. A product of Hastle.</p>
+      <span>© <span id="current-year"></span> concretecalc</span>
+    </footer>
+  </body>
+</html>

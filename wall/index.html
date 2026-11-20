@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f1ea">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f0a500'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' text-anchor='middle' fill='%23232e36'%3Ecc%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Concrete wall calculator: length, height, and thickness, minus door and window openings, to cubic yards and bags.">
+    <title>Concrete Wall Calculator | concretecalc.</title>
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <link rel="canonical" href="https://codeshifter-git.github.io/concretecalc/wall/">
+    <meta property="og:title" content="Concrete Wall Calculator | concretecalc.">
+    <meta property="og:description" content="Concrete wall calculator: length, height, and thickness, minus door and window openings, to cubic yards and bags.">
+<script>
+      /* Loading skeleton: this timer lives in <head> (before any stylesheet) so a slow connection can't delay it. */
+      (function () {
+        var root = document.documentElement;
+        var done = false;
+        setTimeout(function () { if (!done && document.readyState !== "complete") root.classList.add("is-loading"); }, 400);
+        function hide() {
+          if (done) return;
+          done = true;
+          root.classList.remove("is-loading");
+          setTimeout(function () { root.classList.add("is-ready"); }, 400);
+        }
+        window.addEventListener("load", hide);
+        setTimeout(hide, 2500);
+      })();
+    </script>
+    <link rel="preload" href="../fonts/bitter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+      /* Loading skeleton — inline so it paints before the stylesheet arrives. */
+      .page-skeleton { position: fixed; inset: 0; z-index: 60; background: #f3f1ea; opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s; }
+      html.is-loading .page-skeleton { opacity: 1; visibility: visible; transition: opacity .15s ease; }
+      html.is-ready .page-skeleton { display: none; }
+      .sk-inner { max-width: 1050px; margin: 0 auto; padding: 26px 7% 0; }
+      .sk-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 52px; }
+      .sk-mark { width: 30px; height: 30px; border-radius: 9px 9px 9px 3px; background: #f0a500; color: #232e36; display: grid; place-items: center; font: 600 12px monospace; }
+      .sk-bar { position: relative; height: 16px; max-width: 520px; margin: 0 0 14px; border-radius: 4px; background: #e6e4d8; overflow: hidden; }
+      .sk-bar--title { height: 34px; max-width: 420px; }
+      .sk-bar--short { max-width: 300px; }
+      .sk-bar::after, .sk-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, #fffdf8 50%, transparent); transform: translateX(-100%); animation: sk-shimmer 1.4s infinite; }
+      .sk-card { position: relative; height: 220px; margin-top: 34px; border-radius: 10px; background: #e6e4d8; overflow: hidden; }
+      @keyframes sk-shimmer { to { transform: translateX(100%); } }
+      @media (prefers-reduced-motion: reduce) { .sk-bar::after, .sk-card::after { animation: none; } }
+    </style>
+    <link rel="stylesheet" href="../styles.css?v=1">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Concrete Wall Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "en",
+  "description": "Concrete wall calculator: length, height, and thickness, minus door and window openings, to cubic yards and bags."
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I count door and window openings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Measure each opening and work out its area: width times height. A 3 by 7 foot door is 21 square feet. Add up the areas of all the doors and windows and type the total into the openings box. The calculator subtracts it from the wall area before working out the volume."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How thick should a concrete foundation wall be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the design of the building and the soil it sits on, so a builder or an engineer should set the thickness. This calculator does not pick a thickness for you — type the thickness from your plan and it works out the concrete."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many bags of concrete do I need for a wall?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Divide the ordered cubic feet by the yield of one bag. An 80-lb bag fills 0.60 cubic feet. The 20 ft wall at 8 ft high and 8 inches thick, minus one door, is 92.67 cubic feet before waste, which is 155 bags of 80-lb mix. The calculator shows all four bag sizes, with waste included."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this wall calculator free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It is free, with no sign-up. Use it as often as you like, on a phone or a computer."
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://codeshifter-git.github.io/concretecalc/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Concrete Wall Calculator",
+      "item": "https://codeshifter-git.github.io/concretecalc/wall/"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Concrete Wall Calculator",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Work out the wall area",
+      "text": "Length times height gives the wall area in square feet. 20 ft × 8 ft = 160 sq ft"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Subtract the openings",
+      "text": "Measure each door and window, work out its area, and add them up. A 3 by 7 foot door is 21 square feet. 160 sq ft − 21 sq ft = 139 sq ft"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Turn thickness into feet",
+      "text": "Thickness is often given in inches. Divide by 12. 8 inches is 0.67 feet. 8 in ÷ 12 = 0.67 ft"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Multiply to get cubic feet",
+      "text": "Net area times thickness gives cubic feet. This is the net volume, before waste. 139 sq ft × 0.67 ft = 92.67 ft³"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Divide by 27, then add waste",
+      "text": "One cubic yard holds 27 cubic feet. Divide, then add 10% waste for spills and uneven forms. 92.67 ft³ ÷ 27 = 3.43 yd³ · × 1.10 = 3.78 yd³"
+    }
+  ]
+}
+    </script>
+    <script src="app.js" defer></script>
+  </head>
+  <body class="tool-page">
+    <div class="page-skeleton" id="page-skeleton" aria-hidden="true">
+      <div class="sk-inner">
+        <div class="sk-brand"><span class="sk-mark">cc</span></div>
+        <div class="sk-bar sk-bar--title"></div>
+        <div class="sk-bar sk-bar--title sk-bar--short"></div>
+        <div class="sk-bar"></div>
+        <div class="sk-bar sk-bar--short"></div>
+        <div class="sk-card"></div>
+      </div>
+    </div>
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="concretecalc. home">
+        <span class="brand-mark" aria-hidden="true">cc</span>
+        <span>concretecalc<span class="brand-period">.</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="../">All calculators</a>
+        <a href="../slab/">Slab</a>
+        <a href="../cubic-yard/">Cubic yard</a>
+        <a href="../guides/">Guides</a>
+      </nav>
+      <a class="header-cta" href="#calculator">Calculate now <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> The concrete wall calculator</p>
+          <h1>Concrete Wall Calculator.<br><span>Length, height, and thickness — minus the openings.</span></h1>
+          <p class="hero-description">A wall 20 feet long and 8 feet high, 8 inches thick, with a 3 by 7 foot door, needs 3.43 cubic yards of concrete. That is 92.67 cubic feet after the door is taken out.</p>
+          <a class="text-link" href="#calculator">Open the calculator <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section class="calculator-section" id="calculator">
+        <div class="calculator">
+          <div class="calc-main">
+            <div class="calc-toolbar">
+              <span class="live-indicator"><span></span> Ready — type a number</span>
+              <button class="reset-button" type="button" id="reset-button">Reset <span aria-hidden="true">↺</span></button>
+            </div>
+            <form id="wall-form" novalidate>
+              <div class="input-grid">
+<div class="field" id="length-field">
+                  <label for="length">Length</label>
+                  <div class="input-with-unit">
+                    <input id="length" name="length" type="number" min="0" step="any" value="20" inputmode="decimal">
+                    <select id="length-unit" name="lengthUnit" aria-label="Unit for length">
+                      <option value="ft" selected>ft</option><option value="in">in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="height-field">
+                  <label for="height">Height</label>
+                  <div class="input-with-unit">
+                    <input id="height" name="height" type="number" min="0" step="any" value="8" inputmode="decimal">
+                    <select id="height-unit" name="heightUnit" aria-label="Unit for height">
+                      <option value="ft" selected>ft</option><option value="in">in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="thickness-field">
+                  <label for="thickness">Thickness</label>
+                  <div class="input-with-unit">
+                    <input id="thickness" name="thickness" type="number" min="0" step="any" value="8" inputmode="decimal">
+                    <select id="thickness-unit" name="thicknessUnit" aria-label="Unit for thickness">
+                      <option value="ft">ft</option><option value="in" selected>in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="openings-field">
+                  <label for="openings">Openings area</label>
+                  <div class="input-with-unit">
+                    <input id="openings" name="openings" type="number" min="0" step="any" value="21" inputmode="decimal">
+                    <select id="openings-unit" name="openingsUnit" aria-label="Unit for openings area">
+                      <option value="ft2" selected>ft²</option><option value="m2">m²</option><option value="yd2">yd²</option>
+                    </select>
+                  </div>
+                  <small class="field-hint">Add up every door and window. Use 0 if there are none.</small>
+                </div>
+              </div>
+              <div class="calc-options">
+                <div class="field">
+                  <label for="waste-slider">Waste allowance</label>
+                  <div class="waste-row">
+                    <input type="range" id="waste-slider" min="0" max="15" step="1" value="10">
+                    <span class="waste-value" id="waste-value">10%</span>
+                  </div>
+                  <small class="field-hint">5–10% for a clean job, 10–15% for rough ground.</small>
+                </div>
+                <div class="field">
+                  <label id="density-label">Concrete density</label>
+                  <div class="density-segmented" role="group" aria-labelledby="density-label" id="density-segmented">
+                    <button type="button" data-density="150" aria-pressed="true">Standard · 150 lb/ft³</button>
+                    <button type="button" data-density="156" aria-pressed="false">Reinforced · 156 lb/ft³</button>
+                    <button type="button" data-density="110" aria-pressed="false">Lightweight · 110 lb/ft³</button>
+                  </div>
+                  <small class="field-hint">Density sets the weight. Standard concrete is 150 lb per cubic foot.</small>
+                </div>
+              </div>
+              <div class="cost-grid">
+                <div class="field">
+                  <label for="price-yard">Price per cubic yard (optional)</label>
+                  <div class="input-with-unit">
+                    <input id="price-yard" name="priceYard" type="number" min="0" step="any" placeholder="e.g. 150" inputmode="decimal">
+                    <span aria-hidden="true">$ / yd³</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="price-bag">Price per bag (optional)</label>
+                  <div class="input-with-unit">
+                    <input id="price-bag" name="priceBag" type="number" min="0" step="any" placeholder="e.g. 6" inputmode="decimal">
+                    <span aria-hidden="true">$ / bag</span>
+                  </div>
+                </div>
+              </div>
+              <p class="form-error" id="form-error" role="alert" hidden></p>
+              <button class="calculate-button" type="submit">Calculate <span aria-hidden="true">↗</span></button>
+              <p class="live-hint">No need to press the button: the answer updates as you type.</p>
+            </form>
+
+            <div class="result-panel" id="result-panel" aria-live="polite" aria-atomic="true">
+              <div class="result-topline"><span>YOUR RESULT</span><span class="result-check" aria-hidden="true">✓</span></div>
+              <div class="result-value" id="result-value">—</div>
+              <p class="result-context" id="result-context"></p>
+              <p class="result-also" id="result-also"></p>
+              <div class="result-rows" id="result-rows"></div>
+              <div class="result-meta"><span id="result-formula"></span><div class="result-actions"><button type="button" id="copy-button">Copy result <span aria-hidden="true">⧉</span></button></div></div>
+              <div class="preset-chips" role="group" aria-label="Common sizes">
+                <span class="preset-label">Common sizes:</span>
+                <button type="button" class="preset-chip" data-length="20" data-lengthUnit="ft" data-height="8" data-heightUnit="ft" data-thickness="8" data-thicknessUnit="in" data-openings="21" data-openingsUnit="ft2">Basement wall 20 ft · 8 ft · 8 in, one door</button><button type="button" class="preset-chip" data-length="30" data-lengthUnit="ft" data-height="8" data-heightUnit="ft" data-thickness="8" data-thicknessUnit="in" data-openings="0" data-openingsUnit="ft2">Garden wall 30 ft · 8 ft · 8 in</button><button type="button" class="preset-chip" data-length="12" data-lengthUnit="ft" data-height="8" data-heightUnit="ft" data-thickness="6" data-thicknessUnit="in" data-openings="21" data-openingsUnit="ft2">Shed wall 12 ft · 8 ft · 6 in, one door</button>
+              </div>
+            </div>
+            <noscript><p class="form-error">This page needs JavaScript to calculate. A wall 20 feet long and 8 feet high, 8 inches thick, with a 3 by 7 foot door, needs 3.43 cubic yards of concrete. That is 92.67 cubic feet after the door is taken out.</p></noscript>
+          </div>
+          <aside class="calc-aside">
+            <span class="aside-number">GOOD TO KNOW</span>
+            <p class="aside-title">Take the openings out first.</p>
+            <p>A door or a window is a hole with no concrete in it. Work out the wall area, subtract the area of every opening, and only then multiply by the thickness.</p>
+            <a href="#guide">How it works <span aria-hidden="true">→</span></a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="quick-examples" id="examples">
+        <div class="quick-title"><span class="eyebrow">Common sizes</span><h2>Three sizes to try.</h2></div>
+        <p class="examples-hint">Tap one — the calculator fills itself in.</p>
+        <div class="example-strip">
+          <button type="button" class="example-card" data-length="20" data-lengthUnit="ft" data-height="8" data-heightUnit="ft" data-thickness="8" data-thicknessUnit="in" data-openings="21" data-openingsUnit="ft2"><span class="example-symbol">▦</span><span class="example-text"><span class="example-title">Basement wall, one door</span><span class="example-sub">20 × 8 ft · 8 in — 3.43 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button><button type="button" class="example-card" data-length="30" data-lengthUnit="ft" data-height="8" data-heightUnit="ft" data-thickness="8" data-thicknessUnit="in" data-openings="0" data-openingsUnit="ft2"><span class="example-symbol">⌂</span><span class="example-text"><span class="example-title">Garden wall, no openings</span><span class="example-sub">30 × 8 ft · 8 in — 5.93 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button><button type="button" class="example-card" data-length="12" data-lengthUnit="ft" data-height="8" data-heightUnit="ft" data-thickness="6" data-thicknessUnit="in" data-openings="21" data-openingsUnit="ft2"><span class="example-symbol">▤</span><span class="example-text"><span class="example-title">Shed wall, one door</span><span class="example-sub">12 × 8 ft · 6 in — 1.39 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button>
+        </div>
+      </section>
+
+      <section class="table-section" id="table">
+        <div class="quick-title"><span class="eyebrow">Reference table</span><h2>Wall volume per 10 ft of run, 8 ft high</h2></div>
+        <p class="table-intro">Concrete in 10 feet of wall at 8 feet high, with no openings. For a longer wall, multiply: a 20 ft wall is twice the 10 ft figure.</p>
+        <div class="table-wrap">
+          <table class="scale-table">
+            <thead><tr><th scope="col">Wall thickness</th><th scope="col">Cubic feet per 10 ft</th><th scope="col">Cubic yards per 10 ft</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">6 in</th><td>40.00 ft³</td><td>1.48 yd³</td></tr>
+              <tr><th scope="row">8 in</th><td>53.33 ft³</td><td>1.98 yd³</td></tr>
+              <tr><th scope="row">10 in</th><td>66.67 ft³</td><td>2.47 yd³</td></tr>
+              <tr><th scope="row">12 in</th><td>80.00 ft³</td><td>2.96 yd³</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="guide-section" id="guide">
+        <div class="guide-intro">
+          <p class="eyebrow">How it works</p>
+          <h2>How the concrete wall calculator works.</h2>
+          <p>A wall is a tall, thin box with holes in it. Work out the area, subtract the openings, then multiply by the thickness.</p>
+          <div class="formula-card"><span>The formulas you need</span><strong>Wall area = length × height</strong><strong>Net area = wall area − openings</strong><strong>Volume = net area × thickness</strong><small>Openings are in square feet. One cubic yard = 27 cubic feet = 0.765 cubic meters.</small></div>
+        </div>
+        <div class="guide-steps">
+          <article class="guide-step"><span class="step-number">01</span><div><h3>Work out the wall area</h3><p>Length times height gives the wall area in square feet.</p><span class="step-equation">20 ft × 8 ft = 160 sq ft</span></div></article><article class="guide-step"><span class="step-number">02</span><div><h3>Subtract the openings</h3><p>Measure each door and window, work out its area, and add them up. A 3 by 7 foot door is 21 square feet.</p><span class="step-equation">160 sq ft − 21 sq ft = 139 sq ft</span></div></article><article class="guide-step"><span class="step-number">03</span><div><h3>Turn thickness into feet</h3><p>Thickness is often given in inches. Divide by 12. 8 inches is 0.67 feet.</p><span class="step-equation">8 in ÷ 12 = 0.67 ft</span></div></article><article class="guide-step"><span class="step-number">04</span><div><h3>Multiply to get cubic feet</h3><p>Net area times thickness gives cubic feet. This is the net volume, before waste.</p><span class="step-equation">139 sq ft × 0.67 ft = 92.67 ft³</span></div></article><article class="guide-step"><span class="step-number">05</span><div><h3>Divide by 27, then add waste</h3><p>One cubic yard holds 27 cubic feet. Divide, then add 10% waste for spills and uneven forms.</p><span class="step-equation">92.67 ft³ ÷ 27 = 3.43 yd³ · × 1.10 = 3.78 yd³</span></div></article>
+        </div>
+      </section>
+
+      <section class="practice-section" id="practice">
+        <div class="quick-title"><span class="eyebrow">Try it yourself</span><h2>Two tasks to try.</h2></div>
+        <p class="table-intro">Tap a task to see the worked solution.</p>
+        <div class="faq-list">
+          <details><summary>Task 1: A wall 15 ft long, 8 ft high, 8 in thick, with one 3×7 ft door. How many cubic yards? <span aria-hidden="true">+</span></summary><p>Work out the cubic yards for a 15 ft wall, 8 ft high and 8 inches thick, with one door that is 3 by 7 feet, before waste.</p><p><strong>Solution:</strong> Wall area is 15 × 8 = 120 square feet. The door is 3 × 7 = 21 square feet. Net area is 99 square feet. 99 × 0.67 ft = 66 cubic feet. 66 ÷ 27 = 2.44 cubic yards.</p></details><details><summary>Task 2: A 10 ft wall, 8 ft high, 6 in thick, no openings. How many 80-lb bags? <span aria-hidden="true">+</span></summary><p>Work out the 80-lb bags for a 10 ft wall, 8 ft high and 6 inches thick, with no openings, before waste. One 80-lb bag fills 0.60 cubic feet.</p><p><strong>Solution:</strong> 10 × 8 × 0.5 = 40 cubic feet. 40 ÷ 0.60 = 66.67, so round up to 67 bags.</p></details>
+        </div>
+      </section>
+
+      <section class="faq-section">
+        <div class="faq-heading"><p class="eyebrow">Still wondering?</p><h2>Questions people ask.</h2></div>
+        <div class="faq-list">
+          <details><summary>How do I count door and window openings? <span aria-hidden="true">+</span></summary><p>Measure each opening and work out its area: width times height. A 3 by 7 foot door is 21 square feet. Add up the areas of all the doors and windows and type the total into the openings box. The calculator subtracts it from the wall area before working out the volume.</p></details><details><summary>How thick should a concrete foundation wall be? <span aria-hidden="true">+</span></summary><p>It depends on the design of the building and the soil it sits on, so a builder or an engineer should set the thickness. This calculator does not pick a thickness for you — type the thickness from your plan and it works out the concrete.</p></details><details><summary>How many bags of concrete do I need for a wall? <span aria-hidden="true">+</span></summary><p>Divide the ordered cubic feet by the yield of one bag. An 80-lb bag fills 0.60 cubic feet. The 20 ft wall at 8 ft high and 8 inches thick, minus one door, is 92.67 cubic feet before waste, which is 155 bags of 80-lb mix. The calculator shows all four bag sizes, with waste included.</p></details><details><summary>Is this wall calculator free? <span aria-hidden="true">+</span></summary><p>Yes. It is free, with no sign-up. Use it as often as you like, on a phone or a computer.</p></details>
+        </div>
+      </section>
+
+      <section class="more-tools">
+        <div class="quick-title"><span class="eyebrow">More calculators</span><h2>More concrete calculators.</h2></div>
+        <p class="more-tools-link"><a href="../">All concrete calculators <span aria-hidden="true">→</span></a></p>
+        <p class="more-tools-link"><a href="../slab/">Concrete Slab Calculator</a> · <a href="../footing/">Concrete Footing Calculator</a> · <a href="../sonotube/">Concrete Calculator For Sonotube</a></p>
+        <p class="more-tools-link"><a href="../guides/">Concrete guides <span aria-hidden="true">→</span></a></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="../"><span class="brand-mark" aria-hidden="true">cc</span><span>concretecalc<span class="brand-period">.</span></span></a>
+      <p>Concrete calculators — simple, fast, and free. A product of Hastle.</p>
+      <span>© <span id="current-year"></span> concretecalc</span>
+    </footer>
+  </body>
+</html>

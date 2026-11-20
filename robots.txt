@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://codeshifter-git.github.io/concretecalc/sitemap.xml

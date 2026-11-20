@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f1ea">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f0a500'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' text-anchor='middle' fill='%23232e36'%3Ecc%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Footing concrete calculator: total run, width, and depth to cubic yards, bags, and cost. A 40 ft footing at 18×12 in needs 2.22 cubic yards.">
+    <title>Concrete Footing Calculator | concretecalc.</title>
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <link rel="canonical" href="https://codeshifter-git.github.io/concretecalc/footing/">
+    <meta property="og:title" content="Concrete Footing Calculator | concretecalc.">
+    <meta property="og:description" content="Footing concrete calculator: total run, width, and depth to cubic yards, bags, and cost. A 40 ft footing at 18×12 in needs 2.22 cubic yards.">
+<script>
+      /* Loading skeleton: this timer lives in <head> (before any stylesheet) so a slow connection can't delay it. */
+      (function () {
+        var root = document.documentElement;
+        var done = false;
+        setTimeout(function () { if (!done && document.readyState !== "complete") root.classList.add("is-loading"); }, 400);
+        function hide() {
+          if (done) return;
+          done = true;
+          root.classList.remove("is-loading");
+          setTimeout(function () { root.classList.add("is-ready"); }, 400);
+        }
+        window.addEventListener("load", hide);
+        setTimeout(hide, 2500);
+      })();
+    </script>
+    <link rel="preload" href="../fonts/bitter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+      /* Loading skeleton — inline so it paints before the stylesheet arrives. */
+      .page-skeleton { position: fixed; inset: 0; z-index: 60; background: #f3f1ea; opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s; }
+      html.is-loading .page-skeleton { opacity: 1; visibility: visible; transition: opacity .15s ease; }
+      html.is-ready .page-skeleton { display: none; }
+      .sk-inner { max-width: 1050px; margin: 0 auto; padding: 26px 7% 0; }
+      .sk-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 52px; }
+      .sk-mark { width: 30px; height: 30px; border-radius: 9px 9px 9px 3px; background: #f0a500; color: #232e36; display: grid; place-items: center; font: 600 12px monospace; }
+      .sk-bar { position: relative; height: 16px; max-width: 520px; margin: 0 0 14px; border-radius: 4px; background: #e6e4d8; overflow: hidden; }
+      .sk-bar--title { height: 34px; max-width: 420px; }
+      .sk-bar--short { max-width: 300px; }
+      .sk-bar::after, .sk-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, #fffdf8 50%, transparent); transform: translateX(-100%); animation: sk-shimmer 1.4s infinite; }
+      .sk-card { position: relative; height: 220px; margin-top: 34px; border-radius: 10px; background: #e6e4d8; overflow: hidden; }
+      @keyframes sk-shimmer { to { transform: translateX(100%); } }
+      @media (prefers-reduced-motion: reduce) { .sk-bar::after, .sk-card::after { animation: none; } }
+    </style>
+    <link rel="stylesheet" href="../styles.css?v=1">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Concrete Footing Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "en",
+  "description": "Footing concrete calculator: total run, width, and depth to cubic yards, bags, and cost. A 40 ft footing at 18×12 in needs 2.22 cubic yards."
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How deep should a footing be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your local building code and the frost line where you live. In cold places the footing must sit below the frost line so the ground cannot lift it. Check with your local building office before you dig — this calculator does not set the depth for you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a continuous footing and a spread footing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A continuous footing runs in one long strip under a whole wall — that is what this calculator works out. A spread footing is a wide, flat pad under one post or column, spreading its load over a bigger patch of ground."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many bags of concrete do I need for a footing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Divide the ordered cubic feet by the yield of one bag. An 80-lb bag fills 0.60 cubic feet. The 40 ft footing at 18×12 in is 60 cubic feet before waste, which is 100 bags of 80-lb mix. The calculator shows all four bag sizes, with waste included."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much waste should I allow for a hand-dug footing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Allow 10–15%. Hand-dug trenches are never exact: the sides crumble, the bottom is uneven, and a little concrete always spills. Use 10% for a clean trench and 15% for rough ground."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this footing calculator free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It is free, with no sign-up. Use it as often as you like, on a phone or a computer."
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://codeshifter-git.github.io/concretecalc/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Concrete Footing Calculator",
+      "item": "https://codeshifter-git.github.io/concretecalc/footing/"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Concrete Footing Calculator",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Add up the total run",
+      "text": "Measure every stretch of footing and add them into one total length. A 40 ft run is one number, even if it turns corners. 25 ft + 15 ft = 40 ft"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Turn width and depth into feet",
+      "text": "Width and depth are often given in inches. Divide by 12. 18 inches is 1.5 feet, and 12 inches is 1 foot. 18 in ÷ 12 = 1.5 ft · 12 in ÷ 12 = 1 ft"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Multiply to get cubic feet",
+      "text": "Total length times width times depth gives cubic feet. This is the net volume, before waste. 40 ft × 1.5 ft × 1 ft = 60 ft³"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Divide by 27 for cubic yards",
+      "text": "One cubic yard holds 27 cubic feet, so divide the cubic feet by 27. 60 ft³ ÷ 27 = 2.22 yd³"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add waste for a hand-dug trench",
+      "text": "A trench dug by hand is never exact, and the sides crumble a little. Add 10% on a clean trench, 15% on a rough one. 2.22 yd³ × 1.10 = 2.44 yd³"
+    }
+  ]
+}
+    </script>
+    <script src="app.js" defer></script>
+  </head>
+  <body class="tool-page">
+    <div class="page-skeleton" id="page-skeleton" aria-hidden="true">
+      <div class="sk-inner">
+        <div class="sk-brand"><span class="sk-mark">cc</span></div>
+        <div class="sk-bar sk-bar--title"></div>
+        <div class="sk-bar sk-bar--title sk-bar--short"></div>
+        <div class="sk-bar"></div>
+        <div class="sk-bar sk-bar--short"></div>
+        <div class="sk-card"></div>
+      </div>
+    </div>
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="concretecalc. home">
+        <span class="brand-mark" aria-hidden="true">cc</span>
+        <span>concretecalc<span class="brand-period">.</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="../">All calculators</a>
+        <a href="../slab/">Slab</a>
+        <a href="../cubic-yard/">Cubic yard</a>
+        <a href="../guides/">Guides</a>
+      </nav>
+      <a class="header-cta" href="#calculator">Calculate now <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> The concrete footing calculator</p>
+          <h1>Concrete Footing Calculator.<br><span>For a straight run of footing, end to end.</span></h1>
+          <p class="hero-description">A 40 ft footing that is 18 inches wide and 12 inches deep needs 2.22 cubic yards of concrete. That is 60 cubic feet. Add 10% waste for a hand-dug trench and order 2.44 cubic yards.</p>
+          <a class="text-link" href="#calculator">Open the calculator <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section class="calculator-section" id="calculator">
+        <div class="calculator">
+          <div class="calc-main">
+            <div class="calc-toolbar">
+              <span class="live-indicator"><span></span> Ready — type a number</span>
+              <button class="reset-button" type="button" id="reset-button">Reset <span aria-hidden="true">↺</span></button>
+            </div>
+            <form id="footing-form" novalidate>
+              <div class="input-grid">
+<div class="field" id="length-field">
+                  <label for="length">Total length</label>
+                  <div class="input-with-unit">
+                    <input id="length" name="length" type="number" min="0" step="any" value="40" inputmode="decimal">
+                    <select id="length-unit" name="lengthUnit" aria-label="Unit for total length">
+                      <option value="ft" selected>ft</option><option value="in">in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="width-field">
+                  <label for="width">Width</label>
+                  <div class="input-with-unit">
+                    <input id="width" name="width" type="number" min="0" step="any" value="18" inputmode="decimal">
+                    <select id="width-unit" name="widthUnit" aria-label="Unit for width">
+                      <option value="ft">ft</option><option value="in" selected>in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="depth-field">
+                  <label for="depth">Depth</label>
+                  <div class="input-with-unit">
+                    <input id="depth" name="depth" type="number" min="0" step="any" value="12" inputmode="decimal">
+                    <select id="depth-unit" name="depthUnit" aria-label="Unit for depth">
+                      <option value="ft">ft</option><option value="in" selected>in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="calc-options">
+                <div class="field">
+                  <label for="waste-slider">Waste allowance</label>
+                  <div class="waste-row">
+                    <input type="range" id="waste-slider" min="0" max="15" step="1" value="10">
+                    <span class="waste-value" id="waste-value">10%</span>
+                  </div>
+                  <small class="field-hint">5–10% for a clean job, 10–15% for rough ground.</small>
+                </div>
+                <div class="field">
+                  <label id="density-label">Concrete density</label>
+                  <div class="density-segmented" role="group" aria-labelledby="density-label" id="density-segmented">
+                    <button type="button" data-density="150" aria-pressed="true">Standard · 150 lb/ft³</button>
+                    <button type="button" data-density="156" aria-pressed="false">Reinforced · 156 lb/ft³</button>
+                    <button type="button" data-density="110" aria-pressed="false">Lightweight · 110 lb/ft³</button>
+                  </div>
+                  <small class="field-hint">Density sets the weight. Standard concrete is 150 lb per cubic foot.</small>
+                </div>
+              </div>
+              <div class="cost-grid">
+                <div class="field">
+                  <label for="price-yard">Price per cubic yard (optional)</label>
+                  <div class="input-with-unit">
+                    <input id="price-yard" name="priceYard" type="number" min="0" step="any" placeholder="e.g. 150" inputmode="decimal">
+                    <span aria-hidden="true">$ / yd³</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="price-bag">Price per bag (optional)</label>
+                  <div class="input-with-unit">
+                    <input id="price-bag" name="priceBag" type="number" min="0" step="any" placeholder="e.g. 6" inputmode="decimal">
+                    <span aria-hidden="true">$ / bag</span>
+                  </div>
+                </div>
+              </div>
+              <p class="form-error" id="form-error" role="alert" hidden></p>
+              <button class="calculate-button" type="submit">Calculate <span aria-hidden="true">↗</span></button>
+              <p class="live-hint">No need to press the button: the answer updates as you type.</p>
+            </form>
+
+            <div class="result-panel" id="result-panel" aria-live="polite" aria-atomic="true">
+              <div class="result-topline"><span>YOUR RESULT</span><span class="result-check" aria-hidden="true">✓</span></div>
+              <div class="result-value" id="result-value">—</div>
+              <p class="result-context" id="result-context"></p>
+              <p class="result-also" id="result-also"></p>
+              <div class="result-rows" id="result-rows"></div>
+              <div class="result-meta"><span id="result-formula"></span><div class="result-actions"><button type="button" id="copy-button">Copy result <span aria-hidden="true">⧉</span></button></div></div>
+              <div class="preset-chips" role="group" aria-label="Common sizes">
+                <span class="preset-label">Common sizes:</span>
+                <button type="button" class="preset-chip" data-length="40" data-lengthUnit="ft" data-width="18" data-widthUnit="in" data-depth="12" data-depthUnit="in">House footing 40 ft · 18×12 in</button><button type="button" class="preset-chip" data-length="30" data-lengthUnit="ft" data-width="16" data-widthUnit="in" data-depth="12" data-depthUnit="in">Garden wall 30 ft · 16×12 in</button><button type="button" class="preset-chip" data-length="60" data-lengthUnit="ft" data-width="24" data-widthUnit="in" data-depth="12" data-depthUnit="in">Long run 60 ft · 24×12 in</button>
+              </div>
+            </div>
+            <noscript><p class="form-error">This page needs JavaScript to calculate. A 40 ft footing that is 18 inches wide and 12 inches deep needs 2.22 cubic yards of concrete. That is 60 cubic feet. Add 10% waste for a hand-dug trench and order 2.44 cubic yards.</p></noscript>
+          </div>
+          <aside class="calc-aside">
+            <span class="aside-number">GOOD TO KNOW</span>
+            <p class="aside-title">Add up the whole run first.</p>
+            <p>Walk the footing and add up every straight stretch into one total length. The calculator treats it as one long box, so a bent run still works if the total length is right.</p>
+            <a href="#guide">How it works <span aria-hidden="true">→</span></a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="quick-examples" id="examples">
+        <div class="quick-title"><span class="eyebrow">Common sizes</span><h2>Three sizes to try.</h2></div>
+        <p class="examples-hint">Tap one — the calculator fills itself in.</p>
+        <div class="example-strip">
+          <button type="button" class="example-card" data-length="40" data-lengthUnit="ft" data-width="18" data-widthUnit="in" data-depth="12" data-depthUnit="in"><span class="example-symbol">▦</span><span class="example-text"><span class="example-title">House footing</span><span class="example-sub">40 ft · 18×12 in — 2.22 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button><button type="button" class="example-card" data-length="30" data-lengthUnit="ft" data-width="16" data-widthUnit="in" data-depth="12" data-depthUnit="in"><span class="example-symbol">▤</span><span class="example-text"><span class="example-title">Garden wall footing</span><span class="example-sub">30 ft · 16×12 in — 1.48 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button><button type="button" class="example-card" data-length="60" data-lengthUnit="ft" data-width="24" data-widthUnit="in" data-depth="12" data-depthUnit="in"><span class="example-symbol">⌂</span><span class="example-text"><span class="example-title">Long footing run</span><span class="example-sub">60 ft · 24×12 in — 4.44 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button>
+        </div>
+      </section>
+
+      <section class="table-section" id="table">
+        <div class="quick-title"><span class="eyebrow">Reference table</span><h2>Footing volume per 10 ft of run</h2></div>
+        <p class="table-intro">Pick a width and a depth to see the concrete in 10 feet of footing. Multiply by your run: a 40 ft run is four times the 10 ft figure.</p>
+        <div class="table-wrap">
+          <table class="scale-table">
+            <thead><tr><th scope="col">Width × depth</th><th scope="col">Cubic feet per 10 ft</th><th scope="col">Cubic yards per 10 ft</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">12 in × 8 in</th><td>6.67 ft³</td><td>0.25 yd³</td></tr>
+              <tr><th scope="row">12 in × 12 in</th><td>10.00 ft³</td><td>0.37 yd³</td></tr>
+              <tr><th scope="row">16 in × 8 in</th><td>8.89 ft³</td><td>0.33 yd³</td></tr>
+              <tr><th scope="row">16 in × 12 in</th><td>13.33 ft³</td><td>0.49 yd³</td></tr>
+              <tr><th scope="row">18 in × 8 in</th><td>10.00 ft³</td><td>0.37 yd³</td></tr>
+              <tr><th scope="row">18 in × 12 in</th><td>15.00 ft³</td><td>0.56 yd³</td></tr>
+              <tr><th scope="row">24 in × 8 in</th><td>13.33 ft³</td><td>0.49 yd³</td></tr>
+              <tr><th scope="row">24 in × 12 in</th><td>20.00 ft³</td><td>0.74 yd³</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="guide-section" id="guide">
+        <div class="guide-intro">
+          <p class="eyebrow">How it works</p>
+          <h2>How the concrete footing calculator works.</h2>
+          <p>A footing is a long, low box under a wall. Its volume is the total run times the width times the depth.</p>
+          <div class="formula-card"><span>The formulas you need</span><strong>Volume = total length × width × depth</strong><strong>Cubic yards = cubic feet ÷ 27</strong><strong>Ordered yards = net yards × (1 + waste)</strong><small>One cubic yard = 27 cubic feet = 0.765 cubic meters. Hand-dug trenches: allow 10–15% waste.</small></div>
+        </div>
+        <div class="guide-steps">
+          <article class="guide-step"><span class="step-number">01</span><div><h3>Add up the total run</h3><p>Measure every stretch of footing and add them into one total length. A 40 ft run is one number, even if it turns corners.</p><span class="step-equation">25 ft + 15 ft = 40 ft</span></div></article><article class="guide-step"><span class="step-number">02</span><div><h3>Turn width and depth into feet</h3><p>Width and depth are often given in inches. Divide by 12. 18 inches is 1.5 feet, and 12 inches is 1 foot.</p><span class="step-equation">18 in ÷ 12 = 1.5 ft · 12 in ÷ 12 = 1 ft</span></div></article><article class="guide-step"><span class="step-number">03</span><div><h3>Multiply to get cubic feet</h3><p>Total length times width times depth gives cubic feet. This is the net volume, before waste.</p><span class="step-equation">40 ft × 1.5 ft × 1 ft = 60 ft³</span></div></article><article class="guide-step"><span class="step-number">04</span><div><h3>Divide by 27 for cubic yards</h3><p>One cubic yard holds 27 cubic feet, so divide the cubic feet by 27.</p><span class="step-equation">60 ft³ ÷ 27 = 2.22 yd³</span></div></article><article class="guide-step"><span class="step-number">05</span><div><h3>Add waste for a hand-dug trench</h3><p>A trench dug by hand is never exact, and the sides crumble a little. Add 10% on a clean trench, 15% on a rough one.</p><span class="step-equation">2.22 yd³ × 1.10 = 2.44 yd³</span></div></article>
+        </div>
+      </section>
+
+      <section class="practice-section" id="practice">
+        <div class="quick-title"><span class="eyebrow">Try it yourself</span><h2>Two tasks to try.</h2></div>
+        <p class="table-intro">Tap a task to see the worked solution.</p>
+        <div class="faq-list">
+          <details><summary>Task 1: A footing is 25 ft long, 12 in wide, and 12 in deep. How many cubic yards? <span aria-hidden="true">+</span></summary><p>Work out the cubic yards for a 25 ft footing that is 12 inches wide and 12 inches deep, before waste.</p><p><strong>Solution:</strong> 12 in is 1 ft. 25 ft × 1 ft × 1 ft = 25 cubic feet. 25 ÷ 27 = 0.93 cubic yards.</p></details><details><summary>Task 2: The 40 ft footing at 18×12 in, with 10% waste — how many 80-lb bags? <span aria-hidden="true">+</span></summary><p>Take the 40 ft footing at 18 inches wide and 12 inches deep, add 10% waste, then work out the 80-lb bags. One 80-lb bag fills 0.60 cubic feet.</p><p><strong>Solution:</strong> Net volume is 60 cubic feet. With 10% waste that is 66 cubic feet. 66 ÷ 0.60 = 110 bags.</p></details>
+        </div>
+      </section>
+
+      <section class="faq-section">
+        <div class="faq-heading"><p class="eyebrow">Still wondering?</p><h2>Questions people ask.</h2></div>
+        <div class="faq-list">
+          <details><summary>How deep should a footing be? <span aria-hidden="true">+</span></summary><p>It depends on your local building code and the frost line where you live. In cold places the footing must sit below the frost line so the ground cannot lift it. Check with your local building office before you dig — this calculator does not set the depth for you.</p></details><details><summary>What is the difference between a continuous footing and a spread footing? <span aria-hidden="true">+</span></summary><p>A continuous footing runs in one long strip under a whole wall — that is what this calculator works out. A spread footing is a wide, flat pad under one post or column, spreading its load over a bigger patch of ground.</p></details><details><summary>How many bags of concrete do I need for a footing? <span aria-hidden="true">+</span></summary><p>Divide the ordered cubic feet by the yield of one bag. An 80-lb bag fills 0.60 cubic feet. The 40 ft footing at 18×12 in is 60 cubic feet before waste, which is 100 bags of 80-lb mix. The calculator shows all four bag sizes, with waste included.</p></details><details><summary>How much waste should I allow for a hand-dug footing? <span aria-hidden="true">+</span></summary><p>Allow 10–15%. Hand-dug trenches are never exact: the sides crumble, the bottom is uneven, and a little concrete always spills. Use 10% for a clean trench and 15% for rough ground.</p></details><details><summary>Is this footing calculator free? <span aria-hidden="true">+</span></summary><p>Yes. It is free, with no sign-up. Use it as often as you like, on a phone or a computer.</p></details>
+        </div>
+      </section>
+
+      <section class="more-tools">
+        <div class="quick-title"><span class="eyebrow">More calculators</span><h2>More concrete calculators.</h2></div>
+        <p class="more-tools-link"><a href="../">All concrete calculators <span aria-hidden="true">→</span></a></p>
+        <p class="more-tools-link"><a href="../slab/">Concrete Slab Calculator</a> · <a href="../sonotube/">Concrete Calculator For Sonotube</a> · <a href="../stairs/">Concrete Stairs Calculator</a></p>
+        <p class="more-tools-link"><a href="../guides/">Concrete guides <span aria-hidden="true">→</span></a></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="../"><span class="brand-mark" aria-hidden="true">cc</span><span>concretecalc<span class="brand-period">.</span></span></a>
+      <p>Concrete calculators — simple, fast, and free. A product of Hastle.</p>
+      <span>© <span id="current-year"></span> concretecalc</span>
+    </footer>
+  </body>
+</html>

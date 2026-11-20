@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f1ea">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f0a500'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' text-anchor='middle' fill='%23232e36'%3Ecc%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Concrete stairs calculator: width, tread, riser, and step count to cubic yards and bags. Five 7×11 in steps, 4 ft wide, need 1.19 cubic yards.">
+    <title>Concrete Stairs Calculator | concretecalc.</title>
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <link rel="canonical" href="https://codeshifter-git.github.io/concretecalc/stairs/">
+    <meta property="og:title" content="Concrete Stairs Calculator | concretecalc.">
+    <meta property="og:description" content="Concrete stairs calculator: width, tread, riser, and step count to cubic yards and bags. Five 7×11 in steps, 4 ft wide, need 1.19 cubic yards.">
+<script>
+      /* Loading skeleton: this timer lives in <head> (before any stylesheet) so a slow connection can't delay it. */
+      (function () {
+        var root = document.documentElement;
+        var done = false;
+        setTimeout(function () { if (!done && document.readyState !== "complete") root.classList.add("is-loading"); }, 400);
+        function hide() {
+          if (done) return;
+          done = true;
+          root.classList.remove("is-loading");
+          setTimeout(function () { root.classList.add("is-ready"); }, 400);
+        }
+        window.addEventListener("load", hide);
+        setTimeout(hide, 2500);
+      })();
+    </script>
+    <link rel="preload" href="../fonts/bitter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+      /* Loading skeleton — inline so it paints before the stylesheet arrives. */
+      .page-skeleton { position: fixed; inset: 0; z-index: 60; background: #f3f1ea; opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s; }
+      html.is-loading .page-skeleton { opacity: 1; visibility: visible; transition: opacity .15s ease; }
+      html.is-ready .page-skeleton { display: none; }
+      .sk-inner { max-width: 1050px; margin: 0 auto; padding: 26px 7% 0; }
+      .sk-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 52px; }
+      .sk-mark { width: 30px; height: 30px; border-radius: 9px 9px 9px 3px; background: #f0a500; color: #232e36; display: grid; place-items: center; font: 600 12px monospace; }
+      .sk-bar { position: relative; height: 16px; max-width: 520px; margin: 0 0 14px; border-radius: 4px; background: #e6e4d8; overflow: hidden; }
+      .sk-bar--title { height: 34px; max-width: 420px; }
+      .sk-bar--short { max-width: 300px; }
+      .sk-bar::after, .sk-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, #fffdf8 50%, transparent); transform: translateX(-100%); animation: sk-shimmer 1.4s infinite; }
+      .sk-card { position: relative; height: 220px; margin-top: 34px; border-radius: 10px; background: #e6e4d8; overflow: hidden; }
+      @keyframes sk-shimmer { to { transform: translateX(100%); } }
+      @media (prefers-reduced-motion: reduce) { .sk-bar::after, .sk-card::after { animation: none; } }
+    </style>
+    <link rel="stylesheet" href="../styles.css?v=1">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Concrete Stairs Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "en",
+  "description": "Concrete stairs calculator: width, tread, riser, and step count to cubic yards and bags. Five 7×11 in steps, 4 ft wide, need 1.19 cubic yards."
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is the volume of concrete stairs worked out?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The flight is treated as solid concrete all the way down to the ground. The volume is width × tread × riser × n(n+1)/2, where n is the number of steps. For 5 steps, n(n+1)/2 is 15. Divide the cubic feet by 27 to get cubic yards."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What size are a typical tread and riser?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 7-inch riser and an 11-inch tread are common sizes for outdoor steps. The riser is the height of one step, and the tread is the flat part you stand on. Check your local building code — it sets the limits for riser height and tread depth."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this calculator count the steps as solid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It treats the flight as solid concrete all the way down to the ground. If your steps are built over a hollow base or an existing slope, you will need less — use the solid figure as the safe order, or work out the fill under the steps separately."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many bags of concrete do I need for stairs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Divide the ordered cubic feet by the yield of one bag. An 80-lb bag fills 0.60 cubic feet. Five steps at 4 ft wide with 11-inch treads and 7-inch risers need 32.08 cubic feet before waste, which is 54 bags of 80-lb mix. The calculator shows all four bag sizes, with waste included."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this stairs calculator free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It is free, with no sign-up. Use it as often as you like, on a phone or a computer."
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://codeshifter-git.github.io/concretecalc/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Concrete Stairs Calculator",
+      "item": "https://codeshifter-git.github.io/concretecalc/stairs/"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Concrete Stairs Calculator",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Count the blocks",
+      "text": "Each step adds a row of blocks. For 5 steps the rows are 1 + 2 + 3 + 4 + 5 blocks. The short way to add that is n(n+1)/2. 5 × 6 ÷ 2 = 15 blocks"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Work out one block",
+      "text": "One block is one tread deep and one riser high, across the full width of the stairs. 4 ft × 0.92 ft × 0.58 ft = 2.14 ft³"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Multiply blocks by block size",
+      "text": "15 blocks times one block gives the net volume in cubic feet. 15 × 2.14 ft³ = 32.08 ft³"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Divide by 27 for cubic yards",
+      "text": "One cubic yard holds 27 cubic feet, so divide the cubic feet by 27. 32.08 ft³ ÷ 27 = 1.19 yd³"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add waste, then order",
+      "text": "Steps have lots of corners and edges, so allow 10% waste — 15% if the forms are rough. 1.19 yd³ × 1.10 = 1.31 yd³"
+    }
+  ]
+}
+    </script>
+    <script src="app.js" defer></script>
+  </head>
+  <body class="tool-page">
+    <div class="page-skeleton" id="page-skeleton" aria-hidden="true">
+      <div class="sk-inner">
+        <div class="sk-brand"><span class="sk-mark">cc</span></div>
+        <div class="sk-bar sk-bar--title"></div>
+        <div class="sk-bar sk-bar--title sk-bar--short"></div>
+        <div class="sk-bar"></div>
+        <div class="sk-bar sk-bar--short"></div>
+        <div class="sk-card"></div>
+      </div>
+    </div>
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="concretecalc. home">
+        <span class="brand-mark" aria-hidden="true">cc</span>
+        <span>concretecalc<span class="brand-period">.</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="../">All calculators</a>
+        <a href="../slab/">Slab</a>
+        <a href="../cubic-yard/">Cubic yard</a>
+        <a href="../guides/">Guides</a>
+      </nav>
+      <a class="header-cta" href="#calculator">Calculate now <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> The concrete stairs calculator</p>
+          <h1>Concrete Stairs Calculator.<br><span>Solid steps, from the first tread to the last.</span></h1>
+          <p class="hero-description">Five steps that are 4 feet wide, with 11-inch treads and 7-inch risers, need 1.19 cubic yards of concrete. That is 32.08 cubic feet. This treats the flight as solid concrete all the way down to the ground.</p>
+          <a class="text-link" href="#calculator">Open the calculator <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section class="calculator-section" id="calculator">
+        <div class="calculator">
+          <div class="calc-main">
+            <div class="calc-toolbar">
+              <span class="live-indicator"><span></span> Ready — type a number</span>
+              <button class="reset-button" type="button" id="reset-button">Reset <span aria-hidden="true">↺</span></button>
+            </div>
+            <form id="stairs-form" novalidate>
+              <div class="input-grid">
+<div class="field" id="width-field">
+                  <label for="width">Width</label>
+                  <div class="input-with-unit">
+                    <input id="width" name="width" type="number" min="0" step="any" value="4" inputmode="decimal">
+                    <select id="width-unit" name="widthUnit" aria-label="Unit for width">
+                      <option value="ft" selected>ft</option><option value="in">in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="tread-field">
+                  <label for="tread">Tread depth</label>
+                  <div class="input-with-unit">
+                    <input id="tread" name="tread" type="number" min="0" step="any" value="11" inputmode="decimal">
+                    <select id="tread-unit" name="treadUnit" aria-label="Unit for tread depth">
+                      <option value="ft">ft</option><option value="in" selected>in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="riser-field">
+                  <label for="riser">Riser height</label>
+                  <div class="input-with-unit">
+                    <input id="riser" name="riser" type="number" min="0" step="any" value="7" inputmode="decimal">
+                    <select id="riser-unit" name="riserUnit" aria-label="Unit for riser height">
+                      <option value="ft">ft</option><option value="in" selected>in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="steps-field">
+                  <label for="steps">Number of steps</label>
+                  <div class="input-with-unit">
+                    <input id="steps" name="steps" type="number" min="1" step="1" value="5" inputmode="numeric">
+                  </div>
+                  <small class="field-hint">Whole number, 1 or more.</small>
+                </div>
+              </div>
+              <div class="calc-options">
+                <div class="field">
+                  <label for="waste-slider">Waste allowance</label>
+                  <div class="waste-row">
+                    <input type="range" id="waste-slider" min="0" max="15" step="1" value="10">
+                    <span class="waste-value" id="waste-value">10%</span>
+                  </div>
+                  <small class="field-hint">5–10% for a clean job, 10–15% for rough ground.</small>
+                </div>
+                <div class="field">
+                  <label id="density-label">Concrete density</label>
+                  <div class="density-segmented" role="group" aria-labelledby="density-label" id="density-segmented">
+                    <button type="button" data-density="150" aria-pressed="true">Standard · 150 lb/ft³</button>
+                    <button type="button" data-density="156" aria-pressed="false">Reinforced · 156 lb/ft³</button>
+                    <button type="button" data-density="110" aria-pressed="false">Lightweight · 110 lb/ft³</button>
+                  </div>
+                  <small class="field-hint">Density sets the weight. Standard concrete is 150 lb per cubic foot.</small>
+                </div>
+              </div>
+              <div class="cost-grid">
+                <div class="field">
+                  <label for="price-yard">Price per cubic yard (optional)</label>
+                  <div class="input-with-unit">
+                    <input id="price-yard" name="priceYard" type="number" min="0" step="any" placeholder="e.g. 150" inputmode="decimal">
+                    <span aria-hidden="true">$ / yd³</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="price-bag">Price per bag (optional)</label>
+                  <div class="input-with-unit">
+                    <input id="price-bag" name="priceBag" type="number" min="0" step="any" placeholder="e.g. 6" inputmode="decimal">
+                    <span aria-hidden="true">$ / bag</span>
+                  </div>
+                </div>
+              </div>
+              <p class="form-error" id="form-error" role="alert" hidden></p>
+              <button class="calculate-button" type="submit">Calculate <span aria-hidden="true">↗</span></button>
+              <p class="live-hint">No need to press the button: the answer updates as you type.</p>
+            </form>
+
+            <div class="result-panel" id="result-panel" aria-live="polite" aria-atomic="true">
+              <div class="result-topline"><span>YOUR RESULT</span><span class="result-check" aria-hidden="true">✓</span></div>
+              <div class="result-value" id="result-value">—</div>
+              <p class="result-context" id="result-context"></p>
+              <p class="result-also" id="result-also"></p>
+              <div class="result-rows" id="result-rows"></div>
+              <div class="result-meta"><span id="result-formula"></span><div class="result-actions"><button type="button" id="copy-button">Copy result <span aria-hidden="true">⧉</span></button></div></div>
+              <div class="preset-chips" role="group" aria-label="Common sizes">
+                <span class="preset-label">Common sizes:</span>
+                <button type="button" class="preset-chip" data-width="4" data-widthUnit="ft" data-tread="11" data-treadUnit="in" data-riser="7" data-riserUnit="in" data-steps="5">Porch steps 4 ft · 5 steps</button><button type="button" class="preset-chip" data-width="3" data-widthUnit="ft" data-tread="11" data-treadUnit="in" data-riser="7" data-riserUnit="in" data-steps="3">Garden steps 3 ft · 3 steps</button><button type="button" class="preset-chip" data-width="5" data-widthUnit="ft" data-tread="12" data-treadUnit="in" data-riser="7" data-riserUnit="in" data-steps="8">Wide entry 5 ft · 8 steps</button>
+              </div>
+            </div>
+            <noscript><p class="form-error">This page needs JavaScript to calculate. Five steps that are 4 feet wide, with 11-inch treads and 7-inch risers, need 1.19 cubic yards of concrete. That is 32.08 cubic feet. This treats the flight as solid concrete all the way down to the ground.</p></noscript>
+          </div>
+          <aside class="calc-aside">
+            <span class="aside-number">GOOD TO KNOW</span>
+            <p class="aside-title">Steps stack like a staircase of blocks.</p>
+            <p>Think of each step as a block. The bottom step is the widest, the top step is one block wide — so the blocks add up to 1 + 2 + 3 + 4 + 5 = 15 blocks for five steps.</p>
+            <a href="#guide">How it works <span aria-hidden="true">→</span></a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="quick-examples" id="examples">
+        <div class="quick-title"><span class="eyebrow">Common sizes</span><h2>Three sizes to try.</h2></div>
+        <p class="examples-hint">Tap one — the calculator fills itself in.</p>
+        <div class="example-strip">
+          <button type="button" class="example-card" data-width="4" data-widthUnit="ft" data-tread="11" data-treadUnit="in" data-riser="7" data-riserUnit="in" data-steps="5"><span class="example-symbol">▦</span><span class="example-text"><span class="example-title">Porch steps</span><span class="example-sub">4 ft wide · 5 steps — 1.19 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button><button type="button" class="example-card" data-width="3" data-widthUnit="ft" data-tread="11" data-treadUnit="in" data-riser="7" data-riserUnit="in" data-steps="3"><span class="example-symbol">⌂</span><span class="example-text"><span class="example-title">Garden steps</span><span class="example-sub">3 ft wide · 3 steps — 0.36 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button><button type="button" class="example-card" data-width="5" data-widthUnit="ft" data-tread="12" data-treadUnit="in" data-riser="7" data-riserUnit="in" data-steps="8"><span class="example-symbol">▤</span><span class="example-text"><span class="example-title">Wide entry steps</span><span class="example-sub">5 ft wide · 8 steps — 3.89 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button>
+        </div>
+      </section>
+
+      <section class="table-section" id="table">
+        <div class="quick-title"><span class="eyebrow">Reference table</span><h2>Stair volume by step count</h2></div>
+        <p class="table-intro">Concrete for a 4 ft wide flight with 11-inch treads and 7-inch risers. More steps add more than one step's worth, because each new step sits on top of the ones below it.</p>
+        <div class="table-wrap">
+          <table class="scale-table">
+            <thead><tr><th scope="col">Number of steps</th><th scope="col">Cubic feet</th><th scope="col">Cubic yards</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">3 steps</th><td>12.83 ft³</td><td>0.48 yd³</td></tr>
+              <tr><th scope="row">4 steps</th><td>21.39 ft³</td><td>0.79 yd³</td></tr>
+              <tr><th scope="row">5 steps</th><td>32.08 ft³</td><td>1.19 yd³</td></tr>
+              <tr><th scope="row">6 steps</th><td>44.92 ft³</td><td>1.66 yd³</td></tr>
+              <tr><th scope="row">8 steps</th><td>77.00 ft³</td><td>2.85 yd³</td></tr>
+              <tr><th scope="row">10 steps</th><td>117.64 ft³</td><td>4.36 yd³</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="guide-section" id="guide">
+        <div class="guide-intro">
+          <p class="eyebrow">How it works</p>
+          <h2>How the concrete stairs calculator works.</h2>
+          <p>A solid flight of steps is a stack of blocks. Count the blocks, work out one block, and multiply.</p>
+          <div class="formula-card"><span>The formulas you need</span><strong>Volume = width × tread × riser × n(n+1)/2</strong><strong>n is the number of steps</strong><strong>Cubic yards = cubic feet ÷ 27</strong><small>This treats the flight as solid concrete all the way down to the ground. One cubic yard = 27 cubic feet.</small></div>
+        </div>
+        <div class="guide-steps">
+          <article class="guide-step"><span class="step-number">01</span><div><h3>Count the blocks</h3><p>Each step adds a row of blocks. For 5 steps the rows are 1 + 2 + 3 + 4 + 5 blocks. The short way to add that is n(n+1)/2.</p><span class="step-equation">5 × 6 ÷ 2 = 15 blocks</span></div></article><article class="guide-step"><span class="step-number">02</span><div><h3>Work out one block</h3><p>One block is one tread deep and one riser high, across the full width of the stairs.</p><span class="step-equation">4 ft × 0.92 ft × 0.58 ft = 2.14 ft³</span></div></article><article class="guide-step"><span class="step-number">03</span><div><h3>Multiply blocks by block size</h3><p>15 blocks times one block gives the net volume in cubic feet.</p><span class="step-equation">15 × 2.14 ft³ = 32.08 ft³</span></div></article><article class="guide-step"><span class="step-number">04</span><div><h3>Divide by 27 for cubic yards</h3><p>One cubic yard holds 27 cubic feet, so divide the cubic feet by 27.</p><span class="step-equation">32.08 ft³ ÷ 27 = 1.19 yd³</span></div></article><article class="guide-step"><span class="step-number">05</span><div><h3>Add waste, then order</h3><p>Steps have lots of corners and edges, so allow 10% waste — 15% if the forms are rough.</p><span class="step-equation">1.19 yd³ × 1.10 = 1.31 yd³</span></div></article>
+        </div>
+      </section>
+
+      <section class="practice-section" id="practice">
+        <div class="quick-title"><span class="eyebrow">Try it yourself</span><h2>Two tasks to try.</h2></div>
+        <p class="table-intro">Tap a task to see the worked solution.</p>
+        <div class="faq-list">
+          <details><summary>Task 1: A flight 3 ft wide, 11 in tread, 7 in riser, 4 steps. How many cubic yards? <span aria-hidden="true">+</span></summary><p>Work out the cubic yards for a 3 ft wide flight with 11-inch treads, 7-inch risers, and 4 steps, before waste.</p><p><strong>Solution:</strong> Blocks = 4 × 5 ÷ 2 = 10. One block is 3 ft × 0.92 ft × 0.58 ft = 1.60 cubic feet. 10 × 1.60 = 16.04 cubic feet. 16.04 ÷ 27 = 0.59 cubic yards.</p></details><details><summary>Task 2: Six steps, 4 ft wide, 11×7 in, with 10% waste — how many 80-lb bags? <span aria-hidden="true">+</span></summary><p>Take six steps at 4 ft wide with 11-inch treads and 7-inch risers, add 10% waste, then work out the 80-lb bags. One 80-lb bag fills 0.60 cubic feet.</p><p><strong>Solution:</strong> Net volume is 44.92 cubic feet. With 10% waste that is 49.41 cubic feet. 49.41 ÷ 0.60 = 82.35, so round up to 83 bags.</p></details>
+        </div>
+      </section>
+
+      <section class="faq-section">
+        <div class="faq-heading"><p class="eyebrow">Still wondering?</p><h2>Questions people ask.</h2></div>
+        <div class="faq-list">
+          <details><summary>How is the volume of concrete stairs worked out? <span aria-hidden="true">+</span></summary><p>The flight is treated as solid concrete all the way down to the ground. The volume is width × tread × riser × n(n+1)/2, where n is the number of steps. For 5 steps, n(n+1)/2 is 15. Divide the cubic feet by 27 to get cubic yards.</p></details><details><summary>What size are a typical tread and riser? <span aria-hidden="true">+</span></summary><p>A 7-inch riser and an 11-inch tread are common sizes for outdoor steps. The riser is the height of one step, and the tread is the flat part you stand on. Check your local building code — it sets the limits for riser height and tread depth.</p></details><details><summary>Does this calculator count the steps as solid? <span aria-hidden="true">+</span></summary><p>Yes. It treats the flight as solid concrete all the way down to the ground. If your steps are built over a hollow base or an existing slope, you will need less — use the solid figure as the safe order, or work out the fill under the steps separately.</p></details><details><summary>How many bags of concrete do I need for stairs? <span aria-hidden="true">+</span></summary><p>Divide the ordered cubic feet by the yield of one bag. An 80-lb bag fills 0.60 cubic feet. Five steps at 4 ft wide with 11-inch treads and 7-inch risers need 32.08 cubic feet before waste, which is 54 bags of 80-lb mix. The calculator shows all four bag sizes, with waste included.</p></details><details><summary>Is this stairs calculator free? <span aria-hidden="true">+</span></summary><p>Yes. It is free, with no sign-up. Use it as often as you like, on a phone or a computer.</p></details>
+        </div>
+      </section>
+
+      <section class="more-tools">
+        <div class="quick-title"><span class="eyebrow">More calculators</span><h2>More concrete calculators.</h2></div>
+        <p class="more-tools-link"><a href="../">All concrete calculators <span aria-hidden="true">→</span></a></p>
+        <p class="more-tools-link"><a href="../slab/">Concrete Slab Calculator</a> · <a href="../footing/">Concrete Footing Calculator</a> · <a href="../sonotube/">Concrete Calculator For Sonotube</a></p>
+        <p class="more-tools-link"><a href="../guides/">Concrete guides <span aria-hidden="true">→</span></a></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="../"><span class="brand-mark" aria-hidden="true">cc</span><span>concretecalc<span class="brand-period">.</span></span></a>
+      <p>Concrete calculators — simple, fast, and free. A product of Hastle.</p>
+      <span>© <span id="current-year"></span> concretecalc</span>
+    </footer>
+  </body>
+</html>

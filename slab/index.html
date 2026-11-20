@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f1ea">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f0a500'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' text-anchor='middle' fill='%23232e36'%3Ecc%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Slab concrete calculator: enter length, width, and thickness for cubic yards, bags, weight, and cost. A 10×10 slab at 4 inches needs 1.23 cubic yards.">
+    <title>Concrete Slab Calculator | concretecalc.</title>
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <link rel="canonical" href="https://codeshifter-git.github.io/concretecalc/slab/">
+    <meta property="og:title" content="Concrete Slab Calculator | concretecalc.">
+    <meta property="og:description" content="Slab concrete calculator: enter length, width, and thickness for cubic yards, bags, weight, and cost. A 10×10 slab at 4 inches needs 1.23 cubic yards.">
+<script>
+      /* Loading skeleton: this timer lives in <head> (before any stylesheet) so a slow connection can't delay it. */
+      (function () {
+        var root = document.documentElement;
+        var done = false;
+        setTimeout(function () { if (!done && document.readyState !== "complete") root.classList.add("is-loading"); }, 400);
+        function hide() {
+          if (done) return;
+          done = true;
+          root.classList.remove("is-loading");
+          setTimeout(function () { root.classList.add("is-ready"); }, 400);
+        }
+        window.addEventListener("load", hide);
+        setTimeout(hide, 2500);
+      })();
+    </script>
+    <link rel="preload" href="../fonts/bitter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+      /* Loading skeleton — inline so it paints before the stylesheet arrives. */
+      .page-skeleton { position: fixed; inset: 0; z-index: 60; background: #f3f1ea; opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s; }
+      html.is-loading .page-skeleton { opacity: 1; visibility: visible; transition: opacity .15s ease; }
+      html.is-ready .page-skeleton { display: none; }
+      .sk-inner { max-width: 1050px; margin: 0 auto; padding: 26px 7% 0; }
+      .sk-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 52px; }
+      .sk-mark { width: 30px; height: 30px; border-radius: 9px 9px 9px 3px; background: #f0a500; color: #232e36; display: grid; place-items: center; font: 600 12px monospace; }
+      .sk-bar { position: relative; height: 16px; max-width: 520px; margin: 0 0 14px; border-radius: 4px; background: #e6e4d8; overflow: hidden; }
+      .sk-bar--title { height: 34px; max-width: 420px; }
+      .sk-bar--short { max-width: 300px; }
+      .sk-bar::after, .sk-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, #fffdf8 50%, transparent); transform: translateX(-100%); animation: sk-shimmer 1.4s infinite; }
+      .sk-card { position: relative; height: 220px; margin-top: 34px; border-radius: 10px; background: #e6e4d8; overflow: hidden; }
+      @keyframes sk-shimmer { to { transform: translateX(100%); } }
+      @media (prefers-reduced-motion: reduce) { .sk-bar::after, .sk-card::after { animation: none; } }
+    </style>
+    <link rel="stylesheet" href="../styles.css?v=1">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Concrete Slab Calculator",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "en",
+  "description": "Slab concrete calculator: enter length, width, and thickness for cubic yards, bags, weight, and cost. A 10×10 slab at 4 inches needs 1.23 cubic yards."
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much concrete do I need for a 10×10 slab?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At 4 inches thick, a 10 ft by 10 ft slab needs 1.23 cubic yards, or 33.33 cubic feet. With 10% waste, order 1.36 cubic yards. At 6 inches thick, the same slab needs 1.85 cubic yards."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How thick should a concrete slab be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 4-inch slab suits a patio or walkway. A driveway or a slab that holds a car usually needs 6 inches. When in doubt, ask a local contractor — the right thickness depends on the soil and the load."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many bags of concrete do I need for a slab?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Divide the ordered cubic feet by the yield of one bag. An 80-lb bag fills 0.60 cubic feet, a 60-lb bag fills 0.45, a 50-lb bag fills 0.375, and a 40-lb bag fills 0.30. For the 10×10 ft slab at 4 in thick with 10% waste, that is 36.67 cubic feet, or 62 bags of 80-lb mix. The calculator shows all four bag sizes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many cubic yards do I need for a driveway?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the size and the thickness. A 12 ft by 20 ft driveway at 6 inches thick needs 4.44 cubic yards. Measure your own driveway, pick the thickness, and the calculator does the rest. For help picking a thickness, see the <a href=\"../guides/\">thickness guide</a>."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this slab calculator free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It is free, with no sign-up. Use it as often as you like, on a phone or a computer."
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://codeshifter-git.github.io/concretecalc/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Concrete Slab Calculator",
+      "item": "https://codeshifter-git.github.io/concretecalc/slab/"
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Concrete Slab Calculator",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Measure length and width",
+      "text": "Measure the slab in feet, where it will go. A patio that is 10 ft long and 10 ft wide covers 100 square feet. 10 ft × 10 ft = 100 sq ft"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Turn thickness into feet",
+      "text": "Thickness is often given in inches. Divide inches by 12 to get feet. 4 inches is 0.33 feet. 4 in ÷ 12 = 0.33 ft"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Multiply to get cubic feet",
+      "text": "Length times width times thickness gives cubic feet. This is the net volume, before waste. 10 ft × 10 ft × 0.33 ft = 33.33 ft³"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Divide by 27 for cubic yards",
+      "text": "One cubic yard holds 27 cubic feet, so divide the cubic feet by 27. 33.33 ft³ ÷ 27 = 1.23 yd³"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Add waste, then order",
+      "text": "Spills, uneven ground, and a little extra in the forms eat concrete. Add 10% for a clean job, 15% for rough ground. 1.23 yd³ × 1.10 = 1.36 yd³"
+    }
+  ]
+}
+    </script>
+    <script src="app.js" defer></script>
+  </head>
+  <body class="tool-page">
+    <div class="page-skeleton" id="page-skeleton" aria-hidden="true">
+      <div class="sk-inner">
+        <div class="sk-brand"><span class="sk-mark">cc</span></div>
+        <div class="sk-bar sk-bar--title"></div>
+        <div class="sk-bar sk-bar--title sk-bar--short"></div>
+        <div class="sk-bar"></div>
+        <div class="sk-bar sk-bar--short"></div>
+        <div class="sk-card"></div>
+      </div>
+    </div>
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="concretecalc. home">
+        <span class="brand-mark" aria-hidden="true">cc</span>
+        <span>concretecalc<span class="brand-period">.</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="../">All calculators</a>
+        <a href="../slab/">Slab</a>
+        <a href="../cubic-yard/">Cubic yard</a>
+        <a href="../guides/">Guides</a>
+      </nav>
+      <a class="header-cta" href="#calculator">Calculate now <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> The concrete slab calculator</p>
+          <h1>Concrete Slab Calculator.<br><span>For patios, driveways, and shed bases.</span></h1>
+          <p class="hero-description">A 10 ft by 10 ft slab at 4 inches thick needs 1.23 cubic yards of concrete. That is 33.33 cubic feet. With 10% extra for waste, order 1.36 cubic yards.</p>
+          <a class="text-link" href="#calculator">Open the calculator <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section class="calculator-section" id="calculator">
+        <div class="calculator">
+          <div class="calc-main">
+            <div class="calc-toolbar">
+              <span class="live-indicator"><span></span> Ready — type a number</span>
+              <button class="reset-button" type="button" id="reset-button">Reset <span aria-hidden="true">↺</span></button>
+            </div>
+            <form id="slab-form" novalidate>
+              <div class="input-grid">
+<div class="field" id="length-field">
+                  <label for="length">Length</label>
+                  <div class="input-with-unit">
+                    <input id="length" name="length" type="number" min="0" step="any" value="10" inputmode="decimal">
+                    <select id="length-unit" name="lengthUnit" aria-label="Unit for length">
+                      <option value="ft" selected>ft</option><option value="in">in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="width-field">
+                  <label for="width">Width</label>
+                  <div class="input-with-unit">
+                    <input id="width" name="width" type="number" min="0" step="any" value="10" inputmode="decimal">
+                    <select id="width-unit" name="widthUnit" aria-label="Unit for width">
+                      <option value="ft" selected>ft</option><option value="in">in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div><div class="field" id="thickness-field">
+                  <label for="thickness">Thickness</label>
+                  <div class="input-with-unit">
+                    <input id="thickness" name="thickness" type="number" min="0" step="any" value="4" inputmode="decimal">
+                    <select id="thickness-unit" name="thicknessUnit" aria-label="Unit for thickness">
+                      <option value="ft">ft</option><option value="in" selected>in</option><option value="yd">yd</option><option value="m">m</option><option value="cm">cm</option><option value="mm">mm</option>
+                    </select>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="calc-options">
+                <div class="field">
+                  <label for="waste-slider">Waste allowance</label>
+                  <div class="waste-row">
+                    <input type="range" id="waste-slider" min="0" max="15" step="1" value="10">
+                    <span class="waste-value" id="waste-value">10%</span>
+                  </div>
+                  <small class="field-hint">5–10% for a clean job, 10–15% for rough ground.</small>
+                </div>
+                <div class="field">
+                  <label id="density-label">Concrete density</label>
+                  <div class="density-segmented" role="group" aria-labelledby="density-label" id="density-segmented">
+                    <button type="button" data-density="150" aria-pressed="true">Standard · 150 lb/ft³</button>
+                    <button type="button" data-density="156" aria-pressed="false">Reinforced · 156 lb/ft³</button>
+                    <button type="button" data-density="110" aria-pressed="false">Lightweight · 110 lb/ft³</button>
+                  </div>
+                  <small class="field-hint">Density sets the weight. Standard concrete is 150 lb per cubic foot.</small>
+                </div>
+              </div>
+              <div class="cost-grid">
+                <div class="field">
+                  <label for="price-yard">Price per cubic yard (optional)</label>
+                  <div class="input-with-unit">
+                    <input id="price-yard" name="priceYard" type="number" min="0" step="any" placeholder="e.g. 150" inputmode="decimal">
+                    <span aria-hidden="true">$ / yd³</span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="price-bag">Price per bag (optional)</label>
+                  <div class="input-with-unit">
+                    <input id="price-bag" name="priceBag" type="number" min="0" step="any" placeholder="e.g. 6" inputmode="decimal">
+                    <span aria-hidden="true">$ / bag</span>
+                  </div>
+                </div>
+              </div>
+              <p class="form-error" id="form-error" role="alert" hidden></p>
+              <button class="calculate-button" type="submit">Calculate <span aria-hidden="true">↗</span></button>
+              <p class="live-hint">No need to press the button: the answer updates as you type.</p>
+            </form>
+
+            <div class="result-panel" id="result-panel" aria-live="polite" aria-atomic="true">
+              <div class="result-topline"><span>YOUR RESULT</span><span class="result-check" aria-hidden="true">✓</span></div>
+              <div class="result-value" id="result-value">—</div>
+              <p class="result-context" id="result-context"></p>
+              <p class="result-also" id="result-also"></p>
+              <div class="result-rows" id="result-rows"></div>
+              <div class="result-meta"><span id="result-formula"></span><div class="result-actions"><button type="button" id="copy-button">Copy result <span aria-hidden="true">⧉</span></button></div></div>
+              <div class="preset-chips" role="group" aria-label="Common sizes">
+                <span class="preset-label">Common sizes:</span>
+                <button type="button" class="preset-chip" data-length="10" data-lengthUnit="ft" data-width="10" data-widthUnit="ft" data-thickness="4" data-thicknessUnit="in">Patio 10×10 ft · 4 in</button><button type="button" class="preset-chip" data-length="12" data-lengthUnit="ft" data-width="20" data-widthUnit="ft" data-thickness="6" data-thicknessUnit="in">Driveway 12×20 ft · 6 in</button><button type="button" class="preset-chip" data-length="8" data-lengthUnit="ft" data-width="10" data-widthUnit="ft" data-thickness="4" data-thicknessUnit="in">Shed base 8×10 ft · 4 in</button>
+              </div>
+            </div>
+            <noscript><p class="form-error">This page needs JavaScript to calculate. A 10 ft by 10 ft slab at 4 inches thick needs 1.23 cubic yards of concrete. That is 33.33 cubic feet. With 10% extra for waste, order 1.36 cubic yards.</p></noscript>
+          </div>
+          <aside class="calc-aside">
+            <span class="aside-number">GOOD TO KNOW</span>
+            <p class="aside-title">Measure twice, pour once.</p>
+            <p>Measure the length and width where the slab will go, and pick the thickness. The calculator turns it into cubic yards, bags, and weight — you do not have to work out the math.</p>
+            <a href="#guide">How it works <span aria-hidden="true">→</span></a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="quick-examples" id="examples">
+        <div class="quick-title"><span class="eyebrow">Common sizes</span><h2>Three sizes to try.</h2></div>
+        <p class="examples-hint">Tap one — the calculator fills itself in.</p>
+        <div class="example-strip">
+          <button type="button" class="example-card" data-length="10" data-lengthUnit="ft" data-width="10" data-widthUnit="ft" data-thickness="4" data-thicknessUnit="in"><span class="example-symbol">▦</span><span class="example-text"><span class="example-title">Patio slab</span><span class="example-sub">10 × 10 ft · 4 in — 1.23 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button><button type="button" class="example-card" data-length="12" data-lengthUnit="ft" data-width="20" data-widthUnit="ft" data-thickness="6" data-thicknessUnit="in"><span class="example-symbol">⌂</span><span class="example-text"><span class="example-title">Driveway slab</span><span class="example-sub">12 × 20 ft · 6 in — 4.44 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button><button type="button" class="example-card" data-length="8" data-lengthUnit="ft" data-width="10" data-widthUnit="ft" data-thickness="4" data-thicknessUnit="in"><span class="example-symbol">▤</span><span class="example-text"><span class="example-title">Shed base</span><span class="example-sub">8 × 10 ft · 4 in — 0.99 yd³</span></span><span class="example-arrow" aria-hidden="true">↗</span></button>
+        </div>
+      </section>
+
+      <section class="table-section" id="table">
+        <div class="quick-title"><span class="eyebrow">Reference table</span><h2>How much ground does one cubic yard cover?</h2></div>
+        <p class="table-intro">One cubic yard covers less ground as the slab gets thicker. Read the thickness, then the square feet it covers. The math is 27 ÷ thickness in feet.</p>
+        <div class="table-wrap">
+          <table class="scale-table">
+            <thead><tr><th scope="col">Slab thickness</th><th scope="col">Square feet per cubic yard</th><th scope="col">How it is worked out</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">2 in</th><td>162 sq ft</td><td>27 ÷ 0.17 ft</td></tr>
+              <tr><th scope="row">3 in</th><td>108 sq ft</td><td>27 ÷ 0.25 ft</td></tr>
+              <tr><th scope="row">4 in</th><td>81 sq ft</td><td>27 ÷ 0.33 ft</td></tr>
+              <tr><th scope="row">6 in</th><td>54 sq ft</td><td>27 ÷ 0.50 ft</td></tr>
+              <tr><th scope="row">8 in</th><td>40.5 sq ft</td><td>27 ÷ 0.67 ft</td></tr>
+              <tr><th scope="row">12 in</th><td>27 sq ft</td><td>27 ÷ 1 ft</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="guide-section" id="guide">
+        <div class="guide-intro">
+          <p class="eyebrow">How it works</p>
+          <h2>How the concrete slab calculator works.</h2>
+          <p>A slab is a flat box. Its volume is length times width times thickness — then divide by 27 to get cubic yards.</p>
+          <div class="formula-card"><span>The formulas you need</span><strong>Volume = length × width × thickness</strong><strong>Cubic yards = cubic feet ÷ 27</strong><strong>Ordered yards = net yards × (1 + waste)</strong><small>One cubic yard = 27 cubic feet = 0.765 cubic meters.</small></div>
+        </div>
+        <div class="guide-steps">
+          <article class="guide-step"><span class="step-number">01</span><div><h3>Measure length and width</h3><p>Measure the slab in feet, where it will go. A patio that is 10 ft long and 10 ft wide covers 100 square feet.</p><span class="step-equation">10 ft × 10 ft = 100 sq ft</span></div></article><article class="guide-step"><span class="step-number">02</span><div><h3>Turn thickness into feet</h3><p>Thickness is often given in inches. Divide inches by 12 to get feet. 4 inches is 0.33 feet.</p><span class="step-equation">4 in ÷ 12 = 0.33 ft</span></div></article><article class="guide-step"><span class="step-number">03</span><div><h3>Multiply to get cubic feet</h3><p>Length times width times thickness gives cubic feet. This is the net volume, before waste.</p><span class="step-equation">10 ft × 10 ft × 0.33 ft = 33.33 ft³</span></div></article><article class="guide-step"><span class="step-number">04</span><div><h3>Divide by 27 for cubic yards</h3><p>One cubic yard holds 27 cubic feet, so divide the cubic feet by 27.</p><span class="step-equation">33.33 ft³ ÷ 27 = 1.23 yd³</span></div></article><article class="guide-step"><span class="step-number">05</span><div><h3>Add waste, then order</h3><p>Spills, uneven ground, and a little extra in the forms eat concrete. Add 10% for a clean job, 15% for rough ground.</p><span class="step-equation">1.23 yd³ × 1.10 = 1.36 yd³</span></div></article>
+        </div>
+      </section>
+
+      <section class="practice-section" id="practice">
+        <div class="quick-title"><span class="eyebrow">Try it yourself</span><h2>Two tasks to try.</h2></div>
+        <p class="table-intro">Tap a task to see the worked solution.</p>
+        <div class="faq-list">
+          <details><summary>Task 1: A patio is 12 ft by 15 ft and 4 in thick. How many cubic yards, before waste? <span aria-hidden="true">+</span></summary><p>A patio is 12 ft long, 15 ft wide, and 4 in thick. Work out the cubic yards, before any waste is added.</p><p><strong>Solution:</strong> 4 in is 4 ÷ 12 = 0.33 ft. 12 ft × 15 ft × 0.33 ft = 60 cubic feet. 60 ÷ 27 = 2.22 cubic yards.</p></details><details><summary>Task 2: How many 80-lb bags for the 10×10 ft slab at 4 in thick, with 10% waste? <span aria-hidden="true">+</span></summary><p>Take the 10 ft by 10 ft slab at 4 in thick, add 10% waste, then work out how many 80-lb bags that is. One 80-lb bag fills 0.60 cubic feet.</p><p><strong>Solution:</strong> Net volume is 33.33 cubic feet. With 10% waste that is 36.67 cubic feet. 36.67 ÷ 0.60 = 61.11, so round up to 62 bags.</p></details>
+        </div>
+      </section>
+
+      <section class="faq-section">
+        <div class="faq-heading"><p class="eyebrow">Still wondering?</p><h2>Questions people ask.</h2></div>
+        <div class="faq-list">
+          <details><summary>How much concrete do I need for a 10×10 slab? <span aria-hidden="true">+</span></summary><p>At 4 inches thick, a 10 ft by 10 ft slab needs 1.23 cubic yards, or 33.33 cubic feet. With 10% waste, order 1.36 cubic yards. At 6 inches thick, the same slab needs 1.85 cubic yards.</p></details><details><summary>How thick should a concrete slab be? <span aria-hidden="true">+</span></summary><p>A 4-inch slab suits a patio or walkway. A driveway or a slab that holds a car usually needs 6 inches. When in doubt, ask a local contractor — the right thickness depends on the soil and the load.</p></details><details><summary>How many bags of concrete do I need for a slab? <span aria-hidden="true">+</span></summary><p>Divide the ordered cubic feet by the yield of one bag. An 80-lb bag fills 0.60 cubic feet, a 60-lb bag fills 0.45, a 50-lb bag fills 0.375, and a 40-lb bag fills 0.30. For the 10×10 ft slab at 4 in thick with 10% waste, that is 36.67 cubic feet, or 62 bags of 80-lb mix. The calculator shows all four bag sizes.</p></details><details><summary>How many cubic yards do I need for a driveway? <span aria-hidden="true">+</span></summary><p>It depends on the size and the thickness. A 12 ft by 20 ft driveway at 6 inches thick needs 4.44 cubic yards. Measure your own driveway, pick the thickness, and the calculator does the rest. For help picking a thickness, see the <a href="../guides/">thickness guide</a>.</p></details><details><summary>Is this slab calculator free? <span aria-hidden="true">+</span></summary><p>Yes. It is free, with no sign-up. Use it as often as you like, on a phone or a computer.</p></details>
+        </div>
+      </section>
+
+      <section class="more-tools">
+        <div class="quick-title"><span class="eyebrow">More calculators</span><h2>More concrete calculators.</h2></div>
+        <p class="more-tools-link"><a href="../">All concrete calculators <span aria-hidden="true">→</span></a></p>
+        <p class="more-tools-link"><a href="../footing/">Concrete Footing Calculator</a> · <a href="../sonotube/">Concrete Calculator For Sonotube</a> · <a href="../stairs/">Concrete Stairs Calculator</a></p>
+        <p class="more-tools-link"><a href="../guides/">Concrete guides <span aria-hidden="true">→</span></a></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="../"><span class="brand-mark" aria-hidden="true">cc</span><span>concretecalc<span class="brand-period">.</span></span></a>
+      <p>Concrete calculators — simple, fast, and free. A product of Hastle.</p>
+      <span>© <span id="current-year"></span> concretecalc</span>
+    </footer>
+  </body>
+</html>
