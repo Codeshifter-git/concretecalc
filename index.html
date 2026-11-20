@@ -647,6 +647,70 @@
         </div>
       </section>
 
+      <section class="unit-converter" id="unit-converter">
+        <div class="quick-title"><span class="eyebrow">Convert</span><h2>Quick unit converter.</h2></div>
+        <p class="table-intro">Feet to metres, cubic feet to cubic yards, pounds to kilograms — type a number and it converts at once.</p>
+        <div class="unit-converter-card">
+          <div class="uc-row">
+            <div class="uc-field uc-field--value">
+              <label for="uc-value">Value</label>
+              <input type="number" id="uc-value" inputmode="decimal" min="0" step="any" value="27">
+            </div>
+            <div class="uc-field">
+              <label for="uc-from">From</label>
+              <select id="uc-from">
+                <optgroup label="Length">
+                  <option value="ft">Feet (ft)</option>
+                  <option value="in">Inches (in)</option>
+                  <option value="yd">Yards (yd)</option>
+                  <option value="m">Metres (m)</option>
+                  <option value="cm">Centimetres (cm)</option>
+                  <option value="mm">Millimetres (mm)</option>
+                </optgroup>
+                <optgroup label="Volume">
+                  <option value="ft3" selected>Cubic feet (ft³)</option>
+                  <option value="yd3">Cubic yards (yd³)</option>
+                  <option value="m3">Cubic metres (m³)</option>
+                </optgroup>
+                <optgroup label="Weight">
+                  <option value="lb">Pounds (lb)</option>
+                  <option value="kg">Kilograms (kg)</option>
+                </optgroup>
+              </select>
+            </div>
+            <button type="button" class="uc-swap" id="uc-swap" aria-label="Swap units"><span aria-hidden="true">⇄</span></button>
+            <div class="uc-field">
+              <label for="uc-to">To</label>
+              <select id="uc-to">
+                <optgroup label="Length">
+                  <option value="ft">Feet (ft)</option>
+                  <option value="in">Inches (in)</option>
+                  <option value="yd">Yards (yd)</option>
+                  <option value="m">Metres (m)</option>
+                  <option value="cm">Centimetres (cm)</option>
+                  <option value="mm">Millimetres (mm)</option>
+                </optgroup>
+                <optgroup label="Volume">
+                  <option value="ft3">Cubic feet (ft³)</option>
+                  <option value="yd3" selected>Cubic yards (yd³)</option>
+                  <option value="m3">Cubic metres (m³)</option>
+                </optgroup>
+                <optgroup label="Weight">
+                  <option value="lb">Pounds (lb)</option>
+                  <option value="kg">Kilograms (kg)</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <p class="uc-result" id="uc-result" aria-live="polite">27 ft³ = 1 yd³</p>
+          <div class="uc-chips">
+            <button type="button" class="preset-chip" data-value="27" data-from="ft3" data-to="yd3">27 ft³ = 1 yd³</button>
+            <button type="button" class="preset-chip" data-value="1" data-from="yd3" data-to="m3">1 yd³ = 0.765 m³</button>
+            <button type="button" class="preset-chip" data-value="10" data-from="ft" data-to="m">10 ft = 3.048 m</button>
+          </div>
+        </div>
+      </section>
+
       <section class="quick-examples" id="examples">
         <div class="quick-title"><span class="eyebrow">Common pours</span><h2>Three pours you already know.</h2></div>
         <p class="examples-hint">Tap one — the calculator fills itself in.</p>
@@ -773,5 +837,53 @@
       <span>© <span id="current-year"></span> concretecalc</span>
     </footer>
     <script>document.querySelector("#current-year").textContent = new Date().getFullYear();</script>
+    <script>
+    /* Quick unit converter — length, volume, weight. FACTOR is "base units per
+       1 of this unit" (bases: ft, ft³, lb), so convert = value × from / to.
+       Results round to 4 significant figures, trailing zeros trimmed. */
+    (function () {
+      var LABELS = { ft: "ft", in: "in", yd: "yd", m: "m", cm: "cm", mm: "mm", ft3: "ft³", yd3: "yd³", m3: "m³", lb: "lb", kg: "kg" };
+      var CATEGORY = { ft: "length", in: "length", yd: "length", m: "length", cm: "length", mm: "length", ft3: "volume", yd3: "volume", m3: "volume", lb: "weight", kg: "weight" };
+      var FACTOR = { ft: 1, in: 1 / 12, yd: 3, m: 3.28084, cm: 0.0328084, mm: 0.00328084, ft3: 1, yd3: 27, m3: 35.3147, lb: 1, kg: 2.20462 };
+      var FIRST = { length: "ft", volume: "ft3", weight: "lb" };
+      var valueEl = document.getElementById("uc-value");
+      var fromEl = document.getElementById("uc-from");
+      var toEl = document.getElementById("uc-to");
+      var resultEl = document.getElementById("uc-result");
+      var swapEl = document.getElementById("uc-swap");
+      if (!valueEl || !fromEl || !toEl || !resultEl) return;
+      function fmt(v) { return String(parseFloat(v.toPrecision(4))); }
+      function update() {
+        var v = parseFloat(valueEl.value);
+        if (isNaN(v)) { resultEl.textContent = "Type a number to convert."; resultEl.classList.add("is-error"); return; }
+        if (CATEGORY[fromEl.value] !== CATEGORY[toEl.value]) {
+          resultEl.textContent = "Pick units from the same group.";
+          resultEl.classList.add("is-error");
+          return;
+        }
+        resultEl.classList.remove("is-error");
+        var out = v * FACTOR[fromEl.value] / FACTOR[toEl.value];
+        resultEl.textContent = fmt(v) + " " + LABELS[fromEl.value] + " = " + fmt(out) + " " + LABELS[toEl.value];
+      }
+      fromEl.addEventListener("change", function () {
+        if (CATEGORY[toEl.value] !== CATEGORY[fromEl.value]) toEl.value = FIRST[CATEGORY[fromEl.value]];
+        update();
+      });
+      toEl.addEventListener("change", update);
+      valueEl.addEventListener("input", update);
+      if (swapEl) swapEl.addEventListener("click", function () {
+        var tmp = fromEl.value; fromEl.value = toEl.value; toEl.value = tmp; update();
+      });
+      document.querySelectorAll(".uc-chips .preset-chip").forEach(function (chip) {
+        chip.addEventListener("click", function () {
+          valueEl.value = chip.getAttribute("data-value");
+          fromEl.value = chip.getAttribute("data-from");
+          toEl.value = chip.getAttribute("data-to");
+          update();
+        });
+      });
+      update();
+    })();
+    </script>
   </body>
 </html>
