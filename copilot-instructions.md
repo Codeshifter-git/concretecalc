@@ -86,7 +86,7 @@ These are the numbers the whole site stands on. If a page contradicts one, the p
 - Bags per yard: 40 lb → **90**, 50 lb → **72**, 60 lb → **60**, 80 lb → **45**. Yields: 0.30 / 0.375 / 0.45 / 0.60 ft³.
 - Density: standard 150 lb/ft³ → 1 yd³ ≈ **4,050 lb**; reinforced 156 → 4,212 lb; lightweight 110 → 2,970 lb.
 - Waste: 5–10% clean pours, 10–15% rough ground.
-- Mix 1:2:3 ≈ 22% cement / 33% sand / 45% aggregate by volume. (Note: the literal parts split is 17/33/50; the site uses the 22/33/45 figures from the keyword spec — do not "fix" one side without checking the other.)
+- Mix 1:2:3 ≈ 17% cement / 33% sand / 50% aggregate by volume (literal parts split: 1 of 6 parts cement, 2 of 6 sand, 3 of 6 aggregate).
 - Cure: walk 24–48h, drive 7 days, full strength 28 days.
 - Coverage: 1 yd³ at 4″ covers **81 sq ft**; at 6″ 54 sq ft; at 2″ 162 sq ft; at 3″ 108 sq ft; at 8″ 40.5 sq ft; at 12″ 27 sq ft.
 - Shape formulas: slab/footing L×W×T; round column/pad πr²×H; wall (L×H − openings)×T; stairs W×tread×riser×n(n+1)/2 (solid to grade); curb L×(curbW×curbH + gutterW×gutterT); monolithic slab (L×W×T) + 2(L+W)×edgeW×edgeD.
