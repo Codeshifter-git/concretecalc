@@ -679,6 +679,40 @@ def field_html(f, slug):
                   {hint}
                 </div>"""
 
+# Back-to-top button + script (2026-11-25). Plain string (not an f-string)
+# so the JS braces survive: the page template below is an f-string.
+# Inserted before </body> on every generated tool page; the hand-written
+# pages (index.html, guides) carry the same block verbatim.
+BACK_TO_TOP_HTML = """    <button class="back-to-top" type="button" id="back-to-top" aria-label="Back to top"><span aria-hidden="true">↑</span></button>
+    <script>
+    // Back to top (2026-11-25): fixed button, appears after 500 px of scroll.
+    (function () {
+      var btn = document.getElementById('back-to-top');
+      var footer = document.querySelector('.site-footer');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var ticking = false;
+      function update() {
+        ticking = false;
+        var y = window.scrollY || window.pageYOffset;
+        btn.classList.toggle('is-visible', y > 500);
+        if (footer) {
+          var lift = Math.max(16, window.innerHeight - footer.getBoundingClientRect().top + 16);
+          btn.style.bottom = lift + 'px';
+        }
+      }
+      function onScroll() {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      });
+      update();
+    })();
+    </script>
+"""
+
 def render_html(p):
     slug = p["slug"]
     name = p["title"].replace(" | concretecalc.", "")
@@ -975,7 +1009,7 @@ def render_html(p):
       <p>Concrete calculators — simple, fast, and free. A product of Hastle.</p>
       <span>© <span id="current-year"></span> concretecalc</span>
     </footer>
-  </body>
+{BACK_TO_TOP_HTML}  </body>
 </html>
 """
 
